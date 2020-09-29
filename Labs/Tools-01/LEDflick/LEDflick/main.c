@@ -45,41 +45,41 @@ int main(void)
         _delay_ms(LONG_DELAY);
         // Invert LED in Data Register
         // PORTB = PORTB xor 0010 0000
-        PORTB = PORTB ^ (1<<LED_GREEN); //sviti dlouze
+        	PORTB = PORTB ^ (1<<LED_GREEN); //sviti dlouze
 		_delay_ms(LONG_DELAY);
-		PORTB = PORTB ^ (1<<LED_GREEN); //ne
+		PORTB = PORTB ^ (1<<LED_GREEN); 
 		_delay_ms(LONG_DELAY);
 		PORTB = PORTB ^ (1<<LED_GREEN); //sviti kratce
 		_delay_ms(SHORT_DELAY);
-		PORTB = PORTB ^ (1<<LED_GREEN); //ne
+		PORTB = PORTB ^ (1<<LED_GREEN); 
 		_delay_ms(LONG_DELAY);
 		PORTB = PORTB ^ (1<<LED_GREEN);	//sviti kratce
 		_delay_ms(SHORT_DELAY);
-		PORTB = PORTB ^ (1<<LED_GREEN); //ne
+		PORTB = PORTB ^ (1<<LED_GREEN); 
 		_delay_ms(LONG_DELAY*2);		//konec d
-		PORTB = PORTB ^ (1<<LED_GREEN);	//sviti 
+		PORTB = PORTB ^ (1<<LED_GREEN);	//sviti kratce
 		_delay_ms(SHORT_DELAY);
-		PORTB = PORTB ^ (1<<LED_GREEN); //ne
+		PORTB = PORTB ^ (1<<LED_GREEN); 
 		_delay_ms(LONG_DELAY*2);		//konec e
 		PORTB = PORTB ^ (1<<LED_GREEN); //sviti kratce
 		_delay_ms(SHORT_DELAY);
-		PORTB = PORTB ^ (1<<LED_GREEN); //ne
+		PORTB = PORTB ^ (1<<LED_GREEN); 
 		_delay_ms(LONG_DELAY);
 		PORTB = PORTB ^ (1<<LED_GREEN); //sviti kratce
 		_delay_ms(SHORT_DELAY);
-		PORTB = PORTB ^ (1<<LED_GREEN); //ne
+		PORTB = PORTB ^ (1<<LED_GREEN); 
 		_delay_ms(LONG_DELAY);
 		PORTB = PORTB ^ (1<<LED_GREEN); //sviti dlouze
 		_delay_ms(LONG_DELAY);
-		PORTB = PORTB ^ (1<<LED_GREEN); //ne
+		PORTB = PORTB ^ (1<<LED_GREEN); 
 		_delay_ms(LONG_DELAY);
 		PORTB = PORTB ^ (1<<LED_GREEN); //sviti dlouze
 		_delay_ms(LONG_DELAY);
-		PORTB = PORTB ^ (1<<LED_GREEN); //ne
+		PORTB = PORTB ^ (1<<LED_GREEN); 
 		_delay_ms(LONG_DELAY);
 		PORTB = PORTB ^ (1<<LED_GREEN); //sviti dlouze
 		_delay_ms(LONG_DELAY);
-		PORTB = PORTB ^ (1<<LED_GREEN); //ne
+		PORTB = PORTB ^ (1<<LED_GREEN); 
 		_delay_ms(LONG_DELAY);
     }
 
