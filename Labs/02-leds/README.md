@@ -13,8 +13,11 @@ Diode active high:
 ![logic](../../Images/DiodeActiveHigh.PNG)
 
 Diode active low:
+
 ![logic](../../Images/DiodeActiveLow.PNG)
-&nbsp;
+
+
+
 [Calculate LED resistor value](https://electronicsclub.info/leds.htm) for typical red and blue LEDs.
 
 
