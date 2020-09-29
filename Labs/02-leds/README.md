@@ -20,6 +20,7 @@ Diode active low:
 
 [Calculate LED resistor value](https://electronicsclub.info/leds.htm) for typical red and blue LEDs.
 
+![Clock period](../../Images/ohms_law.png)
 
 | **LED color** | **Supply voltage** | **LED current** | **LED voltage** | **Resistor value** |
 | :-: | :-: | :-: | :-: | :-: |
