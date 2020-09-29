@@ -11,7 +11,6 @@
 
 /* Defines -----------------------------------------------------------*/
 #define LED_GREEN   PB5     // AVR pin where green LED is connected
-#define SHORT_DELAY 250      // Delay in miliseconds
 #define LONG_DELAY 1000      // Delay in miliseconds
 #ifndef F_CPU
 #define F_CPU 16000000      // CPU frequency in Hz required for delay func
@@ -50,23 +49,23 @@ int main(void)
 		PORTB = PORTB ^ (1<<LED_GREEN); 
 		_delay_ms(LONG_DELAY);
 		PORTB = PORTB ^ (1<<LED_GREEN); //long
-		_delay_ms(SHORT_DELAY);
+		_delay_ms(LONG_DELAY/4);
 		PORTB = PORTB ^ (1<<LED_GREEN); 
 		_delay_ms(LONG_DELAY);
 		PORTB = PORTB ^ (1<<LED_GREEN);	//short
-		_delay_ms(SHORT_DELAY);
+		_delay_ms(LONG_DELAY/4);
 		PORTB = PORTB ^ (1<<LED_GREEN); 
 		_delay_ms(LONG_DELAY*2);		//end of 'd'
 		PORTB = PORTB ^ (1<<LED_GREEN);	//short
-		_delay_ms(SHORT_DELAY);
+		_delay_ms(LONG_DELAY/4);
 		PORTB = PORTB ^ (1<<LED_GREEN); 
 		_delay_ms(LONG_DELAY*2);		//end of 'e'
 		PORTB = PORTB ^ (1<<LED_GREEN); //short
-		_delay_ms(SHORT_DELAY);
+		_delay_ms(LONG_DELAY/4);
 		PORTB = PORTB ^ (1<<LED_GREEN); 
 		_delay_ms(LONG_DELAY);
 		PORTB = PORTB ^ (1<<LED_GREEN); //short
-		_delay_ms(SHORT_DELAY);
+		_delay_ms(LONG_DELAY/4);
 		PORTB = PORTB ^ (1<<LED_GREEN); 
 		_delay_ms(LONG_DELAY);
 		PORTB = PORTB ^ (1<<LED_GREEN); //long
