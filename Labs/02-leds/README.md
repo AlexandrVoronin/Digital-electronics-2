@@ -10,6 +10,7 @@ Draw two basic ways to connect a LED to the output pin of the microcontroller: L
 
 ![logic](../../Images/DiodeActiveHigh.PNG)
 ![logic](../../Images/DiodeActiveLow.PNG)
+&nbsp;
 [Calculate LED resistor value](https://electronicsclub.info/leds.htm) for typical red and blue LEDs.
 
 
@@ -21,6 +22,6 @@ Draw two basic ways to connect a LED to the output pin of the microcontroller: L
 
 
 Draw the basic ways to connect a push button to the microcontroller input pin: button active-low, button active-high.
-
+&nbsp;
 ![logic](../../Images/PushActiveHigh.PNG)
 ![logic](../../Images/PushActiveLow.PNG)
