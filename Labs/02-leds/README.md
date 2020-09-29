@@ -70,7 +70,7 @@ See [schematic of Arduino Uno board](../../Docs/arduino_shield.pdf) in docs fold
 | :-: | :-: | :-- |
 | A | x | Microcontroller ATmega328P does not contain port A |
 | B | 0 | Yes (Arduino pin 8) |
-|   | 1 | No (Arduino pin -9) Header|
+|   | 1 | Yes (Arduino pin -9) Header|
 |   | 2 | Yes (Arduino pin -10) LED|
 |   | 3 | Yes (Arduino pin -11) LED |
 |   | 4 | Yes (Arduino pin 12) LED|
@@ -82,7 +82,7 @@ See [schematic of Arduino Uno board](../../Docs/arduino_shield.pdf) in docs fold
 |   | 2 | Yes (Arduino pin A2) Push button |
 |   | 3 | Yes (Arduino pin A3) Push button |
 |   | 4 | No (Arduino pin A4) Analog sensor (only input) |
-|   | 5 | No (Arduino pin A5) Header |
+|   | 5 | Yes (Arduino pin A5) Header |
 |   | 6 | did not find on schematic|
 |   | 7 | did not find on schematic |
 | D | 0 | Yes (Arduino pin RX<-0) |
@@ -90,6 +90,6 @@ See [schematic of Arduino Uno board](../../Docs/arduino_shield.pdf) in docs fold
 |   | 2 | No (Arduino pin 2) Digital sensor (only input) |
 |   | 3 | No (Arduino pin -3) Digital sensor (only output) |
 |   | 4 | No (Arduino pin 4) Reset clok |
-|   | 5 | No (Arduino pin -5) Header |
-|   | 6 | No (Arduino pin -6) Header  |
+|   | 5 | Yes (Arduino pin -5) Header |
+|   | 6 | Yes (Arduino pin -6) Header  |
 |   | 7 | Yes (Arduino pin 7)|
