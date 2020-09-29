@@ -8,7 +8,11 @@ The purpose of this laboratory exercise is to learn how to use basic input/outpu
 
 Draw two basic ways to connect a LED to the output pin of the microcontroller: LED active-low, LED active-high. What is the name of the LED pin that is connected to the microcontroller in each case?
 
+Diode active high:
+
 ![logic](../../Images/DiodeActiveHigh.PNG)
+
+Diode active low:
 ![logic](../../Images/DiodeActiveLow.PNG)
 &nbsp;
 [Calculate LED resistor value](https://electronicsclub.info/leds.htm) for typical red and blue LEDs.
