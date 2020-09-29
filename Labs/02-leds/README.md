@@ -24,8 +24,8 @@ Diode active low:
 
 | **LED color** | **Supply voltage** | **LED current** | **LED voltage** | **Resistor value** |
 | :-: | :-: | :-: | :-: | :-: |
-| red | 5&nbsp;V | 20&nbsp;mA | 2.4 | |
-| blue | 5&nbsp;V | 20&nbsp;mA | 3.8 | |
+| red | 5&nbsp;V | 20&nbsp;mA | 2 | 150 |
+| blue | 5&nbsp;V | 20&nbsp;mA | 4 | 50 |
 
 
 
