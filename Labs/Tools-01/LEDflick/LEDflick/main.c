@@ -57,7 +57,7 @@ int main(void)
 		_delay_ms(SHORT_DELAY);
 		PORTB = PORTB ^ (1<<LED_GREEN); 
 		_delay_ms(LONG_DELAY*2);		//end of 'd'
-		PORTB = PORTB ^ (1<<LED_GREEN);	//long
+		PORTB = PORTB ^ (1<<LED_GREEN);	//short
 		_delay_ms(SHORT_DELAY);
 		PORTB = PORTB ^ (1<<LED_GREEN); 
 		_delay_ms(LONG_DELAY*2);		//end of 'e'
