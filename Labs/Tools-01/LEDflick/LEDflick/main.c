@@ -32,7 +32,8 @@ int main(void)
 {
     // Set pin as output in Data Direction Register
     // DDRB = DDRB or 0010 0000
-    DDRB = DDRB | (1<<LED_GREEN);  //pripojena na pin 5... << je binarni shift ... soucasny stav DDRB (same nuly) or binarnishift jednicky na LED_GREEN=PB5							   // or neprepise co nechci kdyz ma byt1 and kdyz ma byt 0
+    DDRB = DDRB | (1<<LED_GREEN);  //pripojena na pin 5... << je binarni shift ... soucasny stav DDRB (same nuly) or binarnishift jednicky na LED_GREEN=PB5	
+				   // or neprepise co nechci kdyz ma byt1 and kdyz ma byt 0
 									
     // Set pin LOW in Data Register (LED off)
     // PORTB = PORTB and 1101 1111
@@ -44,39 +45,39 @@ int main(void)
         _delay_ms(LONG_DELAY);
         // Invert LED in Data Register
         // PORTB = PORTB xor 0010 0000
-        	PORTB = PORTB ^ (1<<LED_GREEN); //long
+        	PORTB = PORTB ^ (1<<LED_GREEN); //long flick
 		_delay_ms(LONG_DELAY);
 		PORTB = PORTB ^ (1<<LED_GREEN); 
 		_delay_ms(LONG_DELAY);
-		PORTB = PORTB ^ (1<<LED_GREEN); //long
+		PORTB = PORTB ^ (1<<LED_GREEN); //short flick
 		_delay_ms(LONG_DELAY/4);
 		PORTB = PORTB ^ (1<<LED_GREEN); 
 		_delay_ms(LONG_DELAY);
-		PORTB = PORTB ^ (1<<LED_GREEN);	//short
+		PORTB = PORTB ^ (1<<LED_GREEN);	//short flick
 		_delay_ms(LONG_DELAY/4);
 		PORTB = PORTB ^ (1<<LED_GREEN); 
 		_delay_ms(LONG_DELAY*2);		//end of 'd'
-		PORTB = PORTB ^ (1<<LED_GREEN);	//short
+		PORTB = PORTB ^ (1<<LED_GREEN);	//short flick
 		_delay_ms(LONG_DELAY/4);
 		PORTB = PORTB ^ (1<<LED_GREEN); 
 		_delay_ms(LONG_DELAY*2);		//end of 'e'
-		PORTB = PORTB ^ (1<<LED_GREEN); //short
+		PORTB = PORTB ^ (1<<LED_GREEN); //short flick
 		_delay_ms(LONG_DELAY/4);
 		PORTB = PORTB ^ (1<<LED_GREEN); 
 		_delay_ms(LONG_DELAY);
-		PORTB = PORTB ^ (1<<LED_GREEN); //short
+		PORTB = PORTB ^ (1<<LED_GREEN); //short flick
 		_delay_ms(LONG_DELAY/4);
 		PORTB = PORTB ^ (1<<LED_GREEN); 
 		_delay_ms(LONG_DELAY);
-		PORTB = PORTB ^ (1<<LED_GREEN); //long
+		PORTB = PORTB ^ (1<<LED_GREEN); //long flick
 		_delay_ms(LONG_DELAY);
 		PORTB = PORTB ^ (1<<LED_GREEN); 
 		_delay_ms(LONG_DELAY);
-		PORTB = PORTB ^ (1<<LED_GREEN); //long
+		PORTB = PORTB ^ (1<<LED_GREEN); //long flick 
 		_delay_ms(LONG_DELAY);
 		PORTB = PORTB ^ (1<<LED_GREEN); 
 		_delay_ms(LONG_DELAY);
-		PORTB = PORTB ^ (1<<LED_GREEN); //long
+		PORTB = PORTB ^ (1<<LED_GREEN); //long flick
 		_delay_ms(LONG_DELAY);
 		PORTB = PORTB ^ (1<<LED_GREEN); 
 		_delay_ms(LONG_DELAY);		//end of '2'
