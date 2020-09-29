@@ -83,7 +83,7 @@ See [schematic of Arduino Uno board](../../Docs/arduino_shield.pdf) in docs fold
 |   | 3 | Yes (Arduino pin A3) Push button |
 |   | 4 | No (Arduino pin A4) Analog sensor (only input) |
 |   | 5 | Yes (Arduino pin A5) Header |
-|   | 6 | did not find on schematic|
+|   | 6 | did not find on schematic |
 |   | 7 | did not find on schematic |
 | D | 0 | Yes (Arduino pin RX<-0) |
 |   | 1 | Yes (Arduino pin TX<-0) |
