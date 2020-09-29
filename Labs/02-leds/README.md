@@ -30,6 +30,7 @@ Diode active low:
 
 Draw the basic ways to connect a push button to the microcontroller input pin: button active-low, button active-high.
 &nbsp;
+
 Button active high:
 
 ![logic](../../Images/PushActiveHigh.PNG)
