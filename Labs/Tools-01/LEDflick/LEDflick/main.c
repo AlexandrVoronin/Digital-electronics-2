@@ -80,7 +80,7 @@ int main(void)
 		PORTB = PORTB ^ (1<<LED_GREEN); //sviti dlouze
 		_delay_ms(LONG_DELAY);
 		PORTB = PORTB ^ (1<<LED_GREEN); 
-		_delay_ms(LONG_DELAY);
+		_delay_ms(LONG_DELAY);		//konec 2
     }
 
     // Will never reach this
