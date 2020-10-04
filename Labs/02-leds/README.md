@@ -70,26 +70,26 @@ See [schematic of Arduino Uno board](../../Docs/arduino_shield.pdf) in docs fold
 | :-: | :-: | :-- |
 | A | x | Microcontroller ATmega328P does not contain port A |
 | B | 0 | Yes (Arduino pin 8) |
-|   | 1 | Yes (Arduino pin -9) Header|
-|   | 2 | Yes (Arduino pin -10) LED|
-|   | 3 | Yes (Arduino pin -11) LED |
-|   | 4 | Yes (Arduino pin 12) LED|
+|   | 1 | Yes (Arduino pin -9) |
+|   | 2 | Yes (Arduino pin -10)|
+|   | 3 | Yes (Arduino pin -11)|
+|   | 4 | Yes (Arduino pin 12) |
 |   | 5 | Yes (Arduino pin 13) LED L|
-|   | 6 | No GND |
-|   | 7 | No GND|
+|   | 6 | not available |
+|   | 7 | not available |
 | C | 0 | Yes (Arduino pin A0) |
-|   | 1 | Yes (Arduino pin A1) Push button |
-|   | 2 | Yes (Arduino pin A2) Push button |
-|   | 3 | Yes (Arduino pin A3) Push button |
-|   | 4 | No (Arduino pin A4) Analog sensor (only input) |
-|   | 5 | Yes (Arduino pin A5) Header |
-|   | 6 | did not find on schematic |
-|   | 7 | did not find on schematic |
+|   | 1 | Yes (Arduino pin A1)  |
+|   | 2 | Yes (Arduino pin A2)  |
+|   | 3 | Yes (Arduino pin A3)  |
+|   | 4 | No (Arduino pin A4)  |
+|   | 5 | Yes (Arduino pin A5)  |
+|   | 6 | not available |
+|   | 7 | not available |
 | D | 0 | Yes (Arduino pin RX<-0) |
 |   | 1 | Yes (Arduino pin TX<-0) |
-|   | 2 | No (Arduino pin 2) Digital sensor (only input) |
-|   | 3 | No (Arduino pin -3) Digital sensor (only output) |
-|   | 4 | No (Arduino pin 4) Reset clok |
-|   | 5 | Yes (Arduino pin -5) Header |
-|   | 6 | Yes (Arduino pin -6) Header  |
-|   | 7 | Yes (Arduino pin 7)|
+|   | 2 | Yes (Arduino pin 2)  |
+|   | 3 | Yes (Arduino pin -3)|
+|   | 4 | Yes (Arduino pin 4) |
+|   | 5 | Yes (Arduino pin -5)|
+|   | 6 | Yes (Arduino pin -6)|
+|   | 7 | Yes (Arduino pin 7) |
