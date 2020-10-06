@@ -11,7 +11,7 @@ Fill in the following table and enter the number of bits and numeric range for t
 | `uint16_t` | 16 | 0,1...65535  | Unsigned 16-bit integer |
 | `int16_t`  | 16 | -32768...32767  | Signed 16-bit integer |
 | `float`    | 32 | -3.4e+38, ..., 3.4e+38 | Single-precision floating-point |
-| `void`     |  |  | Used when function has no return value |
+| `void`     | 64 (for 64-bit system) | 64bit address | Used when function has no return value |
 
 Any function in C contains a declaration (function prototype), a definition (block of code, body of the function); each declared function can be executed (called).
 
