@@ -35,8 +35,7 @@ int main(void)
     /* GREEN LED */
     GPIO_config_output(&DDRB, LED_GREEN);
     GPIO_write_low(&PORTB, LED_GREEN);
-    //uint8_t a=GPIO_read(&PORTB, LED_GREEN);
-	//printf("%d",a);
+
     /* RED LED */
     GPIO_config_output(&DDRC, LED_RED);
     GPIO_write_high(&PORTC, LED_RED);
