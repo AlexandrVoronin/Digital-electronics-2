@@ -32,40 +32,30 @@ int main(void)
 {
     /* LEDS */
 	
-	
-    // Set pin as output in Data Direction Register...
-    DDRB = DDRB | (1<<LED_1);
-    // ...and turn LED off in Data Register
-    PORTB = PORTB & ~(1<<LED_1);
-
-    // Set pin as output in Data Direction Register...
-    DDRB = DDRB | (1<<LED_2);
-    // ...and turn LED off in Data Register
-    PORTB = PORTB & ~(1<<LED_2);
-	
-    // Set pin as output in Data Direction Register...
-    DDRB = DDRB | (1<<LED_3);
-    // ...and turn LED off in Data Register
-    PORTB = PORTB & ~(1<<LED_3);
-	
-    // Set pin as output in Data Direction Register...
-    DDRB = DDRB | (1<<LED_4);
-    // ...and turn LED off in Data Register
-    PORTB = PORTB & ~(1<<LED_4);
-	
+    	// Set pin as output in Data Direction Register...
+    	DDRB = DDRB | (1<<LED_1);
+    	// ...and turn LED off in Data Register
+    	PORTB = PORTB & ~(1<<LED_1);
+    	// Set pin as output in Data Direction Register...
+    	DDRB = DDRB | (1<<LED_2);
+    	// ...and turn LED off in Data Register
+    	PORTB = PORTB & ~(1<<LED_2);	
+    	// Set pin as output in Data Direction Register...
+    	DDRB = DDRB | (1<<LED_3);
+    	// ...and turn LED off in Data Register
+    	PORTB = PORTB & ~(1<<LED_3);	
+    	// Set pin as output in Data Direction Register...
+	DDRB = DDRB | (1<<LED_4);
+    	// ...and turn LED off in Data Register
+    	PORTB = PORTB & ~(1<<LED_4);
 	// Set pin as output in Data Direction Register...
-    DDRB = DDRB | (1<<LED_5);
-    // ...and turn LED off in Data Register
-    PORTB = PORTB & ~(1<<LED_5);
-
-
-
-	
+    	DDRB = DDRB | (1<<LED_5);
+    	// ...and turn LED off in Data Register
+   	PORTB = PORTB & ~(1<<LED_5);	
 	//set pin as input in Data Direction Register
 	DDRD = DDRD & ~(1<<PUSH_BUTTON);
 	//set pull up resistor on
 	PORTD = PORTD | (1<<PUSH_BUTTON);
-	
     // Infinite loop
     while (1)
     {
@@ -98,10 +88,7 @@ int main(void)
 				PORTB = PORTB ^ (1<<LED_2);
 				
 			}
-
-
     }
-
     // Will never reach this
     return 0;
 }
