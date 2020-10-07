@@ -120,11 +120,11 @@ Disassembly of section .text:
 	//set pull up resistor on
 	PORTD = PORTD | (1<<PUSH_BUTTON);
   96:	58 9a       	sbi	0x0b, 0	; 11
+    while (1)
     {
 			if(bit_is_clear(PIND,PUSH_BUTTON))
 			{
-								// Pause several milliseconds
-			    
+				// Pause several milliseconds
 				PORTB = PORTB ^ (1<<LED_1);
   98:	52 e0       	ldi	r21, 0x02	; 2
 				_delay_ms(BLINK_DELAY);
@@ -152,8 +152,7 @@ Disassembly of section .text:
   a2:	48 99       	sbic	0x09, 0	; 9
   a4:	fe cf       	rjmp	.-4      	; 0xa2 <main+0x22>
 			{
-								// Pause several milliseconds
-			    
+				// Pause several milliseconds
 				PORTB = PORTB ^ (1<<LED_1);
   a6:	35 b1       	in	r19, 0x05	; 5
   a8:	35 27       	eor	r19, r21

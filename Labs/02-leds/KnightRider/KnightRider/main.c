@@ -71,8 +71,7 @@ int main(void)
     {
 			if(bit_is_clear(PIND,PUSH_BUTTON))
 			{
-								// Pause several milliseconds
-			    
+				// Pause several milliseconds
 				PORTB = PORTB ^ (1<<LED_1);
 				_delay_ms(BLINK_DELAY);
 				PORTB = PORTB ^ (1<<LED_1);
