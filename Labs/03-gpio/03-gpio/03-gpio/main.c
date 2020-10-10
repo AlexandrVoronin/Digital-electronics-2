@@ -47,14 +47,14 @@ int main(void)
     while (1)
     {
 
-			// Pause several milliseconds
-			_delay_ms(BLINK_DELAY);
+	// Pause several milliseconds
+	_delay_ms(BLINK_DELAY);
 			
-			if(GPIO_read(&PIND,PUSH_BUTTON))
-			{
-				GPIO_toggle(&PORTB, LED_GREEN);
-				GPIO_toggle(&PORTC, LED_RED);
-		    }
+	if(GPIO_read(&PIND,PUSH_BUTTON))
+	{
+		GPIO_toggle(&PORTB, LED_GREEN);
+		GPIO_toggle(&PORTC, LED_RED);
+	}
         
     }
 
