@@ -47,16 +47,6 @@ int main(void)
     while (1)
     {
 
-<<<<<<< HEAD
-			// Pause several milliseconds
-			_delay_ms(BLINK_DELAY);
-			//if button is not pushed
-			if(GPIO_read(&PIND,PUSH_BUTTON))
-			{
-				GPIO_toggle(&PORTB, LED_GREEN);
-				GPIO_toggle(&PORTC, LED_RED);
-		    }
-=======
 	// Pause several milliseconds
 	_delay_ms(BLINK_DELAY);
 			
@@ -65,7 +55,6 @@ int main(void)
 		GPIO_toggle(&PORTB, LED_GREEN);
 		GPIO_toggle(&PORTC, LED_RED);
 	}
->>>>>>> f2f7bc05104b2c450f5f5a141405e8c14898074d
         
     }
 
