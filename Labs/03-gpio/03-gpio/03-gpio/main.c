@@ -49,7 +49,7 @@ int main(void)
 
 			// Pause several milliseconds
 			_delay_ms(BLINK_DELAY);
-			
+			//if button is not pushed
 			if(GPIO_read(&PIND,PUSH_BUTTON))
 			{
 				GPIO_toggle(&PORTB, LED_GREEN);
