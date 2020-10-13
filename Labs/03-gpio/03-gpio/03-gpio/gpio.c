@@ -53,7 +53,7 @@ uint8_t GPIO_read(volatile uint8_t *reg_name, uint8_t pin_num)
 	if (bit_is_clear(*reg_name,pin_num))	//Check data direction register
 	{
 		return 0;
-    }
+    	}
 	else
 	{
 		return 1;
