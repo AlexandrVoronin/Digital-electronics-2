@@ -21,6 +21,7 @@
 | 0x0018 | TIMER1_COMPB | `TIMER1_COMPB_vect` | Compare match between Timer/Counter1 value and channel B compare value|
 | 0x001A | TIMER1_OVF | TIMER1_OVF_vect | Timer/Counter1 Overflow |
 | 0x0020 | TIMER0_OVF | TIMER0_OVF_vect | Timer/Counter0 Overflow |
+| 0x0028 | USART_RX | USART_RX_vect | USART, Tx Complete |
 | 0x002A | ADC | ADC_vect | ADC Conversion Complete |
 | 0x0030 | TWI | TWI_vect | 2-wire Serial Interface |
 
