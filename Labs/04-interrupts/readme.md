@@ -11,19 +11,19 @@
 | **Program address** | **Source** | **Vector name** | **Description** |
 | :-: | :-- | :-- | :-- |
 | 0x0000 | RESET | -- | Reset of the system |
-| 0x0002 | INT0  | INT0_vect | External Interrupt Request 0 |
-| 0x0004 | INT1 | INT1_vect | External Interrupt Request 1 |
-| 0x0006 | PCINT0 | PCINT0_vect | Pin Change Interrupt Request 0 |
-| 0x0008 | PCINT1 | PCINT1_vect | Pin Change Interrupt Request 1 |
-| 0x000A | PCINT2 | PCINT2_vect | Pin Change Interrupt Request 2 |
-| 0x000C | WDT | WDT_vect | Watchdog Time-out Interrupt |
-| 0x0012 | TIMER2_OVF | TIMER2_OVF_vect | Timer/Counter2 Overflow |
+| 0x0002 | INT0  | `INT0_vect` | External Interrupt Request 0 |
+| 0x0004 | INT1 | `INT1_vect` | External Interrupt Request 1 |
+| 0x0006 | PCINT0 | `PCINT0_vect` | Pin Change Interrupt Request 0 |
+| 0x0008 | PCINT1 | `PCINT1_vect` | Pin Change Interrupt Request 1 |
+| 0x000A | PCINT2 | `PCINT2_vect` | Pin Change Interrupt Request 2 |
+| 0x000C | WDT |`WDT_vect` | Watchdog Time-out Interrupt |
+| 0x0012 | TIMER2_OVF | `TIMER2_OVF_vect` | Timer/Counter2 Overflow |
 | 0x0018 | TIMER1_COMPB | `TIMER1_COMPB_vect` | Compare match between Timer/Counter1 value and channel B compare value|
-| 0x001A | TIMER1_OVF | TIMER1_OVF_vect | Timer/Counter1 Overflow |
-| 0x0020 | TIMER0_OVF | TIMER0_OVF_vect | Timer/Counter0 Overflow |
-| 0x0028 | USART_RX | USART_RX_vect | USART, Tx Complete |
-| 0x002A | ADC | ADC_vect | ADC Conversion Complete |
-| 0x0030 | TWI | TWI_vect | 2-wire Serial Interface |
+| 0x001A | TIMER1_OVF | `TIMER1_OVF_vect` | Timer/Counter1 Overflow |
+| 0x0020 | TIMER0_OVF | `TIMER0_OVF_vect` | Timer/Counter0 Overflow |
+| 0x0028 | USART_RX | `USART_RX_vect` | USART, Rx Complete |
+| 0x002A | ADC | `ADC_vect` | ADC Conversion Complete |
+| 0x0030 | TWI | `TWI_vect` | 2-wire Serial Interface |
 
 | **Module** | **Operation** | **I/O register(s)** | **Bit(s)** |
 | :-: | :-- | :-: | :-- |
