@@ -11,13 +11,22 @@
 | **Program address** | **Source** | **Vector name** | **Description** |
 | :-: | :-- | :-- | :-- |
 | 0x0000 | RESET | -- | Reset of the system |
-| 0x0002 | INT0  | External Interrupt 0 |
-| 0x0004 | INT1 | INT1_vect | External Interrupt Request 1 |
-| 0x0006 | PCINT0 | PCINT0_vect | Pin Change Interrupt Request 0 |
-| 0x0008 | PCINT1 | PCINT1_vect | Pin Change Interrupt Request 1 |
-| 0x000A | PCINT2 | PCINT2_vect | Pin Change Interrupt Request 2 |
-| 0x0012 | TIMER2_OVF | TIMER2_OVF_vect | Timer/Counter2 Overflow |
-| 0x001A | TIMER1_OVF | TIMER1_OVF_vect | Timer/Counter1 Overflow |
-| 0x0020 | TIMER0_OVF | TIMER0_OVF_vect | Timer/Counter0 Overflow |
-| 0x002A | ADC | ADC_vect | ADC Conversion Complete |
-| 0x0030 | TWI | TWI_vect | 2-wire Serial Interface |
+| 0x0002 | INT0  | `INT0_vect` | External Interrupt Request 0 |
+| 0x0004 | INT1 | `INT1_vect` | External Interrupt Request 1 |
+| 0x0006 | PCINT0 | `PCINT0_vect` | Pin Change Interrupt Request 0 |
+| 0x0008 | PCINT1 | `PCINT1_vect` | Pin Change Interrupt Request 1 |
+| 0x000A | PCINT2 | `PCINT2_vect` | Pin Change Interrupt Request 2 |
+| 0x000C | WDT |`WDT_vect` | Watchdog Time-out Interrupt |
+| 0x0012 | TIMER2_OVF | `TIMER2_OVF_vect` | Timer/Counter2 Overflow |
+| 0x0018 | TIMER1_COMPB | `TIMER1_COMPB_vect` | Compare match between Timer/Counter1 value and channel B compare value|
+| 0x001A | TIMER1_OVF | `TIMER1_OVF_vect` | Timer/Counter1 Overflow |
+| 0x0020 | TIMER0_OVF | `TIMER0_OVF_vect` | Timer/Counter0 Overflow |
+| 0x0028 | USART_RX | `USART_RX_vect` | USART, Rx Complete |
+| 0x002A | ADC | `ADC_vect` | ADC Conversion Complete |
+| 0x0030 | TWI | `TWI_vect` | 2-wire Serial Interface |
+
+| **Module** | **Operation** | **I/O register(s)** | **Bit(s)** |
+| :-: | :-- | :-: | :-- |
+| Timer/Counter0 | Prescaler<br><br>8-bit data value<br>Overflow interrupt enable |  TCCR0B<br>TCNT0L,TCNT0H<br> TIMSK0| CS02, CS01, CS00<br>(000: stopped, 001: 1, 010: 8, 011: 64, 100: 256, 101: 1024)<br>TCNT0[7:0]<br>TOIE0 (1: enable, 0: disable) |
+| Timer/Counter1 | Prescaler<br><br>16-bit data value<br>Overflow interrupt enable | TCCR1B<br><br>TCNT1H, TCNT1L<br>TIMSK1 | CS12, CS11, CS10<br>(000: stopped, 001: 1, 010: 8, 011: 64, 100: 256, 101: 1024)<br>TCNT1[15:0]<br>TOIE1 (1: enable, 0: disable) |
+| Timer/Counter2 | Prescaler<br><br>8-bit data value<br>Overflow interrupt enable |  TCCR2B<br>TCNT2L,TCNT2H<br>TIMSK2<br><br> | CS22, CS21, CS20<br>(000: stopped, 001: 1, 010: 8, 011: 32, 100: 64, 101: 128,110: 256,111:1024)<br>TCNT2[7:0]<br> TOIE2 (1: enable, 0: disable)|
