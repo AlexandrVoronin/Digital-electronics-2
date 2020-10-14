@@ -11,7 +11,7 @@
 | **Program address** | **Source** | **Vector name** | **Description** |
 | :-: | :-- | :-- | :-- |
 | 0x0000 | RESET | -- | Reset of the system |
-| 0x0002 | INT0  | External Interrupt 0 |
+| 0x0002 | INT0  | INT0_vect | External Interrupt Request 0 |
 | 0x0004 | INT1 | INT1_vect | External Interrupt Request 1 |
 | 0x0006 | PCINT0 | PCINT0_vect | Pin Change Interrupt Request 0 |
 | 0x0008 | PCINT1 | PCINT1_vect | Pin Change Interrupt Request 1 |
