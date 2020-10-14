@@ -16,7 +16,9 @@
 | 0x0006 | PCINT0 | PCINT0_vect | Pin Change Interrupt Request 0 |
 | 0x0008 | PCINT1 | PCINT1_vect | Pin Change Interrupt Request 1 |
 | 0x000A | PCINT2 | PCINT2_vect | Pin Change Interrupt Request 2 |
+| 0x000C | WDT | WDT_vect | Watchdog Time-out Interrupt |
 | 0x0012 | TIMER2_OVF | TIMER2_OVF_vect | Timer/Counter2 Overflow |
+| 0x0018 | TIMER1_COMPB | `TIMER1_COMPB_vect` | Compare match between Timer/Counter1 value and channel B compare value|
 | 0x001A | TIMER1_OVF | TIMER1_OVF_vect | Timer/Counter1 Overflow |
 | 0x0020 | TIMER0_OVF | TIMER0_OVF_vect | Timer/Counter0 Overflow |
 | 0x002A | ADC | ADC_vect | ADC Conversion Complete |
