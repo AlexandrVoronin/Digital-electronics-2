@@ -67,7 +67,7 @@ int main(void)
 
 /* Interrupt service routines ----------------------------------------*/
 /**
- * ISR starts when Timer/Counter1 overflows. Toggle LED D1 on 
+ * ISR starts when Timer/Counter0 overflows. Toggle LED D1 on 
  * Multi-function shield. */
 ISR(TIMER0_OVF_vect)
 {
@@ -85,7 +85,7 @@ ISR(TIMER1_OVF_vect)
 }
 
 /**
- * ISR starts when Timer/Counter1 overflows. Toggle LED 3 on 
+ * ISR starts when Timer/Counter2 overflows. Toggle LED 3 on 
  * Multi-unction shield. */
 ISR(TIMER2_OVF_vect)
 {
