@@ -30,3 +30,12 @@
 | Timer/Counter0 | Prescaler<br><br>8-bit data value<br>Overflow interrupt enable |  TCCR0B<br>TCNT0L,TCNT0H<br> TIMSK0| CS02, CS01, CS00<br>(000: stopped, 001: 1, 010: 8, 011: 64, 100: 256, 101: 1024)<br>TCNT0[7:0]<br>TOIE0 (1: enable, 0: disable) |
 | Timer/Counter1 | Prescaler<br><br>16-bit data value<br>Overflow interrupt enable | TCCR1B<br><br>TCNT1H, TCNT1L<br>TIMSK1 | CS12, CS11, CS10<br>(000: stopped, 001: 1, 010: 8, 011: 64, 100: 256, 101: 1024)<br>TCNT1[15:0]<br>TOIE1 (1: enable, 0: disable) |
 | Timer/Counter2 | Prescaler<br><br>8-bit data value<br>Overflow interrupt enable |  TCCR2B<br>TCNT2L,TCNT2H<br>TIMSK2<br><br> | CS22, CS21, CS20<br>(000: stopped, 001: 1, 010: 8, 011: 32, 100: 64, 101: 128,110: 256,111:1024)<br>TCNT2[7:0]<br> TOIE2 (1: enable, 0: disable)|
+
+| **Module** | **Description** | **MCU pin** | **Arduino pin** |
+| :-: | :-: | :-: | :-: |
+| Timer/Counter0 | OC0A |  PD6  |  6  |
+|                | OC0B |  PD5  |  5  |
+| Timer/Counter1 | OC1A | PB1 |  9 |
+|                | OC1B | PB2 | 10 |
+| Timer/Counter2 | OC2A |  NA  |  NA  |
+|                | OC2B |  PD3 |  3  |
