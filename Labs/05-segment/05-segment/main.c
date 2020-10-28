@@ -15,8 +15,6 @@
 #include "timer.h"          // Timer library for AVR-GCC
 #include "segment.h"        // Seven-segment display library for AVR-GCC
 
-uint8_t ones = 0;
-uint8_t tens = 0;
 
 /* Function definitions ----------------------------------------------*/
 /**
