@@ -6,4 +6,4 @@
    | D[3:0] |  |  |
    | D[7:4] | PD[7:4] |  |
    
-   ![ascii table](Images/ascii.jpg)
+   ![ascii table](ascii.png)
