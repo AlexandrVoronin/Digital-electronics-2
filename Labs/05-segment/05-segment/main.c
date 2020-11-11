@@ -16,9 +16,12 @@
 #include "segment.h"        // Seven-segment display library for AVR-GCC
 
 
+<<<<<<< HEAD
 static uint8_t singles = 0;
 static uint8_t decimals = 0;
 
+=======
+>>>>>>> f55adf830af54c1d2cb0333976218bd34b48d27b
 /* Function definitions ----------------------------------------------*/
 /**
  * Main function where the program execution begins. Display decimal 
@@ -29,6 +32,7 @@ int main(void)
 {
     // Configure SSD signals
     SEG_init();
+<<<<<<< HEAD
 	
     /* Configure 8-bit Timer/Counter0
      * Set prescaler and enable overflow interrupt */
@@ -42,13 +46,23 @@ int main(void)
 
     // Enables interrupts by setting the global interrupt mask
 	sei();
+=======
+
+    SEG_update_shift_regs(3,0);
+    /* Configure 16-bit Timer/Counter1
+     * Set prescaler and enable overflow interrupt */
+	TIM1_overflow_1s();
+	TIM1_overflow_interrupt_enable();
+	
+    // Enables interrupts by setting the global interrupt mask
+    sei();
+>>>>>>> f55adf830af54c1d2cb0333976218bd34b48d27b
     // Infinite loop
     while (1)
     {
         /* Empty loop. All subsequent operations are performed exclusively 
          * inside interrupt service routines ISRs */
     }
-
     // Will never reach this
     return 0;
 }
@@ -58,8 +72,13 @@ int main(void)
  * ISR starts when Timer/Counter1 overflows. Increment decimal counter value
  * value 
  */
+
+/* */
+
+
 ISR(TIMER1_OVF_vect)
 {
+<<<<<<< HEAD
    singles++;
    if (singles > 9)
    {
@@ -91,3 +110,13 @@ ISR(TIMER0_OVF_vect)
 		position=0;
 	}
 }
+=======
+	static uint8_t snake = 0;
+	SEG_update_shift_regs(snake, 0);
+	snake++;
+	if (snake>5)
+	{
+		snake=0;
+	}
+}
+>>>>>>> f55adf830af54c1d2cb0333976218bd34b48d27b
