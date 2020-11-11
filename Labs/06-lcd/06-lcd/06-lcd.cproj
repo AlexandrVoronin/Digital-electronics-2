@@ -12,9 +12,9 @@
     <OutputFileName>$(MSBuildProjectName)</OutputFileName>
     <OutputFileExtension>.elf</OutputFileExtension>
     <OutputDirectory>$(MSBuildProjectDirectory)\$(Configuration)</OutputDirectory>
-    <AssemblyName>05-segment</AssemblyName>
-    <Name>05-segment</Name>
-    <RootNamespace>05-segment</RootNamespace>
+    <AssemblyName>06-lcd</AssemblyName>
+    <Name>06-lcd</Name>
+    <RootNamespace>06-lcd</RootNamespace>
     <ToolchainFlavour>Native</ToolchainFlavour>
     <KeepTimersRunning>true</KeepTimersRunning>
     <OverrideVtor>false</OverrideVtor>
@@ -120,19 +120,16 @@
     </ToolchainSettings>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="gpio.c">
+    <Compile Include="lcd.c">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="gpio.h">
+    <Compile Include="lcd.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="lcd_definitions.h">
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="main.c">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="segment.c">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="segment.h">
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="timer.h">

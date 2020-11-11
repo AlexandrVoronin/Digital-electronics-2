@@ -12,9 +12,9 @@
     <OutputFileName>$(MSBuildProjectName)</OutputFileName>
     <OutputFileExtension>.elf</OutputFileExtension>
     <OutputDirectory>$(MSBuildProjectDirectory)\$(Configuration)</OutputDirectory>
-    <AssemblyName>05-segment</AssemblyName>
-    <Name>05-segment</Name>
-    <RootNamespace>05-segment</RootNamespace>
+    <AssemblyName>07-uart</AssemblyName>
+    <Name>07-uart</Name>
+    <RootNamespace>07-uart</RootNamespace>
     <ToolchainFlavour>Native</ToolchainFlavour>
     <KeepTimersRunning>true</KeepTimersRunning>
     <OverrideVtor>false</OverrideVtor>
@@ -120,22 +120,7 @@
     </ToolchainSettings>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="gpio.c">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="gpio.h">
-      <SubType>compile</SubType>
-    </Compile>
     <Compile Include="main.c">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="segment.c">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="segment.h">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="timer.h">
       <SubType>compile</SubType>
     </Compile>
   </ItemGroup>
