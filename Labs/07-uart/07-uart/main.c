@@ -18,6 +18,9 @@
 #include <stdlib.h>         // C library. Needed for conversion function
 #include "uart.h"           // Peter Fleury's UART library
 
+#ifndef F_CPU
+#define F_CPU 16000000
+#endif
 /* Function definitions ----------------------------------------------*/
 /**
  * Main function where the program execution begins. Use Timer/Counter1
@@ -35,22 +38,35 @@ int main(void)
 
     // Configure ADC to convert PC0[A0] analog value
     // Set ADC reference to AVcc
-
+	ADMUX |= (1 << REFS0);
+	ADMUX &= ~(1 << REFS1);
+	
     // Set input channet to ADC0
-
+	ADMUX &= ~((1 << MUX0) | (1 << MUX1) | (1 << MUX2) | (1 << MUX3));
+	/*ADMUX &= ~(1 << MUX0);
+	ADMUX &= ~(1 << MUX1);
+	ADMUX &= ~(1 << MUX2);
+	ADMUX &= ~(1 << MUX3);*/
+	
     // Enable ADC module
-
+	ADCSRA |= (1 << ADEN);
+	
     // Enable conversion complete interrupt
+	ADCSRA |= (1 << ADIE);
 
     // Set clock prescaler to 128
-
+	ADCSRA |= ((1 << ADPS0) | (1 << ADPS1) | (1 << ADPS2));
+	/*ADCSRA |= (1 << ADPS0);
+	ADCSRA |= (1 << ADPS1);
+	ADCSRA |= (1 << ADPS2);*/
 
     // Configure 16-bit Timer/Counter1 to start ADC conversion
     // Enable interrupt and set the overflow prescaler to 262 ms
-
+	TIM1_overflow_262ms();
+	TIM1_overflow_interrupt_enable();
 
     // Initialize UART to asynchronous, 8N1, 9600
-
+	uart_init(UART_BAUD_SELECT(9600, F_CPU));
 
     // Enables interrupts by setting the global interrupt mask
     sei();
@@ -74,7 +90,7 @@ int main(void)
 ISR(TIMER1_OVF_vect)
 {
     // Start ADC conversion
-
+	ADCSRA |= (1 << ADSC);
 }
 
 /* -------------------------------------------------------------------*/
@@ -86,7 +102,26 @@ ISR(TIMER1_OVF_vect)
  */
 ISR(ADC_vect)
 {
-
-    // WRITE YOUR CODE HERE
-
+	uint16_t value;
+	char lcd_string[5];
+	
+	value = ADC;
+	
+	itoa(value, lcd_string, 10);
+	lcd_gotoxy(8, 0);
+	lcd_puts("    ");
+	lcd_gotoxy(8, 0);
+	lcd_puts(lcd_string);
+	
+	uart_puts("ADC value in decimal: ");
+	uart_puts(lcd_string);
+	uart_puts("\n");
+	
+	lcd_gotoxy(8, 1);
+	lcd_puts("     ");
+	if (value >= 1016)
+	{
+		lcd_gotoxy(8, 1);
+		lcd_puts("None");
+	}
 }
