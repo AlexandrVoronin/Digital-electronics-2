@@ -39,6 +39,7 @@ SUBDIRS :=
 C_SRCS +=  \
 ../gpio.c \
 ../lcd.c \
+../project_functions.c \
 ../project_setup.c \
 ../main.c \
 ../uart.c
@@ -53,6 +54,7 @@ ASM_SRCS +=
 OBJS +=  \
 gpio.o \
 lcd.o \
+project_functions.o \
 project_setup.o \
 main.o \
 uart.o
@@ -60,6 +62,7 @@ uart.o
 OBJS_AS_ARGS +=  \
 gpio.o \
 lcd.o \
+project_functions.o \
 project_setup.o \
 main.o \
 uart.o
@@ -67,6 +70,7 @@ uart.o
 C_DEPS +=  \
 gpio.d \
 lcd.d \
+project_functions.d \
 project_setup.d \
 main.d \
 uart.d
@@ -74,6 +78,7 @@ uart.d
 C_DEPS_AS_ARGS +=  \
 gpio.d \
 lcd.d \
+project_functions.d \
 project_setup.d \
 main.d \
 uart.d
@@ -100,6 +105,13 @@ LINKER_SCRIPT_DEP+=
 	
 
 ./lcd.o: .././lcd.c
+	@echo Building file: $<
+	@echo Invoking: AVR/GNU C Compiler : 5.4.0
+	$(QUOTE)D:\Atmel\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-gcc.exe$(QUOTE)  -x c -funsigned-char -funsigned-bitfields -DDEBUG  -I"D:\Atmel\7.0\Packs\atmel\ATmega_DFP\1.3.300\include"  -O1 -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -g2 -Wall -mmcu=atmega328p -B "D:\Atmel\7.0\Packs\atmel\ATmega_DFP\1.3.300\gcc\dev\atmega328p" -c -std=gnu99 -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 
+	@echo Finished building: $<
+	
+
+./project_functions.o: .././project_functions.c
 	@echo Building file: $<
 	@echo Invoking: AVR/GNU C Compiler : 5.4.0
 	$(QUOTE)D:\Atmel\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-gcc.exe$(QUOTE)  -x c -funsigned-char -funsigned-bitfields -DDEBUG  -I"D:\Atmel\7.0\Packs\atmel\ATmega_DFP\1.3.300\include"  -O1 -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -g2 -Wall -mmcu=atmega328p -B "D:\Atmel\7.0\Packs\atmel\ATmega_DFP\1.3.300\gcc\dev\atmega328p" -c -std=gnu99 -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 

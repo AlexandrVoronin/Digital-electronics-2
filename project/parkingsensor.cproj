@@ -148,6 +148,12 @@
     <Compile Include="lcd_definitions.h">
       <SubType>compile</SubType>
     </Compile>
+    <Compile Include="project_functions.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="project_functions.h">
+      <SubType>compile</SubType>
+    </Compile>
     <Compile Include="project_setup.c">
       <SubType>compile</SubType>
     </Compile>

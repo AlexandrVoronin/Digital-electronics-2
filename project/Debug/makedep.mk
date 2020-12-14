@@ -6,6 +6,8 @@ gpio.c
 
 lcd.c
 
+project_functions.c
+
 project_setup.c
 
 main.c
