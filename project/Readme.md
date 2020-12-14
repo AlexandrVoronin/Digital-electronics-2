@@ -15,6 +15,7 @@ Authors: Alexandr Voronin, Richard Šebo
 
 <h2> Code description </h2>
 <h3> Flow chart</h3>
+
 ![logic](../Images/flowchart_parkings1.png)
 
 
