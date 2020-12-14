@@ -104,29 +104,9 @@ int main(void)
 		
 		itoa(distances[sensor_id], lcd_string, 10);				// Convert decimal value to string
 		
-		//display distance on lcd
-		Display_dist(sensor_id,distances,lcd_string);
+		Display_dist(sensor_id,distances,lcd_string);			//display distance on lcd
 		
-
-		
-		
-		//interesting info to uart
-		if (distances[0]<100 && distances[1]<100)
-		{
-			uart_puts("Obstacles in front and back!\n");
-		}
-		else if (distances[0]<100)
-		{
-			uart_puts("Obstacle in front!\n");
-		}
-		else if (distances[1]<100)
-		{
-			uart_puts("Obstacle in back!\n");
-		}
-		else
-		{
-			uart_puts("No obstacle nearby!\n");
-		}	
+		Uart_info(distances);									//interesting info to uart
 		
 		//change sensor id for next loop
 		if (sensor_id==0)

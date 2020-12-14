@@ -8,6 +8,7 @@
 #include "project_setup.h"
 #include "lcd.h"
 #include "project_functions.h"
+#include "uart.h"
 //display distances to sensor[id]
 
 
@@ -76,7 +77,24 @@ void Update_warning(int sm_dist)
 	
 
 }
-
+void Uart_info(float dist[]){
+		if (dist[0]<100 && dist[1]<100)
+		{
+			uart_puts("Obstacles in front and back!\n");
+		}
+		else if (dist[0]<100)
+		{
+			uart_puts("Obstacle in front!\n");
+		}
+		else if (dist[1]<100)
+		{
+			uart_puts("Obstacle in back!\n");
+		}
+		else
+		{
+			uart_puts("No obstacle nearby!\n");
+		}	
+}
 //displays bar on lcd based on the smaller distance
 void LoadBar(int distance){
 	if (distance>=500)

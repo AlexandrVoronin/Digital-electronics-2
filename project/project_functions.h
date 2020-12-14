@@ -12,6 +12,7 @@
 void Display_dist(uint8_t id, float dist[], char string[]);
 void Update_warning(int sm_dist);
 void LoadBar(int distance);
+void Uart_info(float dist[]);
 
 
 #endif /* PROJECT_FUNCTIONS_H_ */
