@@ -16,9 +16,10 @@ Authors: Alexandr Voronin, Richard Šebo
 <h2> Code description </h2>
 main.c consists of:
 1. Import of libraries
-2. Global variables initialization
-2. main function body
 
+2. Global variables initialization
+
+3. main function body
 
 4. ISR(INT1_vect) and ISR(INT0_vect)
 - These ISRs are used for getting the distance to an obstacle, each sensor uses its own ISR
@@ -37,6 +38,7 @@ project_setup.c:
 
 project_functions.c:
 - Functions used for displaying and updating the distance, loading bar and warnings on LCD and UART information (see functions table)
+
 
 <h3> Flow chart</h3>
 
