@@ -85,7 +85,7 @@ int main(void)
 		}
 
 		int smaller_distance = 1;					//for saving the smaller distance of the 2 sensors
-
+		
 		if(distances[0] > distances[1])
 		{
 			smaller_distance = distances[1];	

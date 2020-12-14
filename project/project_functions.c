@@ -41,36 +41,41 @@ void Update_warning(int sm_dist)
 	if (sm_dist>=400)
 	{
 		
-		LED_toggle(1);
-		lcd_gotoxy(24, 2);
-		lcd_puts("ALL CLEAR!");
+		lcd_gotoxy(22, 2);
+		lcd_puts("OUSTIDE OF RANGE!");
 	}
 
 	else if (sm_dist <= 400 && sm_dist > 200)
 	{
 		LED_toggle(2);
-		lcd_gotoxy(24, 2);
-		lcd_puts("ALL CLEAR!");
+		lcd_gotoxy(22, 2);
+		lcd_puts("    ALL CLEAR!    ");
 	}
 	else if (sm_dist <= 200 && sm_dist > 100)
 	{
 		LED_toggle(3);
-		lcd_gotoxy(24, 2);
-		lcd_puts("PRIHORIVA!");
+		lcd_gotoxy(23, 2);
+		lcd_puts("   PRIHORIVA!  ");
 	}
 
 	else if (sm_dist <= 100 && sm_dist > 50)
 	{
 		LED_toggle(4);
-		lcd_gotoxy(24, 2);
-		lcd_puts("!!!SLOW!!!");
+		lcd_gotoxy(23, 2);
+		lcd_puts("    !!SLOW!! ");
 	}
-	else if (sm_dist <= 50 )
+	else if (sm_dist <= 50 && sm_dist>10 )
 	{
 		LED_toggle(5);
-		lcd_gotoxy(24, 2);
-		lcd_puts("!!!STOP!!!");
+		lcd_gotoxy(23, 2);
+		lcd_puts("   !!STOP!! ");
 	}
+	else if (sm_dist <= 10 )
+	{
+		LED_toggle(5);
+		lcd_gotoxy(23, 2);
+		lcd_puts("   !!STOP!! ");
+	}	
 	
 
 }
