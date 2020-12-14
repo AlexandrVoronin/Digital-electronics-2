@@ -60,6 +60,7 @@ int main(void)
 	
     while (1) 
     {
+		//set frequency signaling diode to loew
 		GPIO_write_low(&PORTB, alarm);
 		if (trigger_enable==1)
 		{
@@ -92,71 +93,21 @@ int main(void)
 		{
 			smaller_distance = distances[0];	
 		}
-		//update load bar
+		
+		//update load bar based on smaller distance
 		LoadBar(smaller_distance);	
 		
-		//update warnin messae based on smaller distance				
-		if (smaller_distance>=400)
-		{
-			LEDs_off();
-			LED_toggle(1);
-			lcd_gotoxy(24, 2);
-			lcd_puts("ALL CLEAR!");					
-		}
-
-		else if (smaller_distance <= 400 && smaller_distance > 200)
-		{
-			LEDs_off();
-			LED_toggle(2);
-			lcd_gotoxy(24, 2);
-			lcd_puts("ALL CLEAR!");
-		}
-		else if (smaller_distance <= 200 && smaller_distance > 100)
-		{
-			LEDs_off();
-			LED_toggle(3);
-			lcd_gotoxy(24, 2);
-			lcd_puts("PRIHORIVA!");			
-		}
-
-		else if (smaller_distance <= 100 && smaller_distance > 50)
-		{
-			LEDs_off();
-			LED_toggle(4);
-			lcd_gotoxy(24, 2);
-			lcd_puts("!!!SLOW!!!");				
-		}	
-		else if (smaller_distance <= 50 )
-		{
-			LEDs_off();
-			LED_toggle(5);
-			lcd_gotoxy(24, 2);
-			lcd_puts("!!!STOP!!!");
-		}							
-		
+		//update warning message based on smaller distance				
+		Update_warning(smaller_distance);					
+	
 		distances[sensor_id]=distances[sensor_id]*(0.15009);	//convert to cm
 		
 		itoa(distances[sensor_id], lcd_string, 10);				// Convert decimal value to string
 		
 		//display distance on lcd
-		if (distances[sensor_id]<10)
-		{
-			lcd_gotoxy(14,sensor_id);		//set position to hundrets
-			lcd_puts("  ");					//clear hundrets and tenths
-			lcd_gotoxy(16, sensor_id);		//go to ones
-		}
+		Display_dist(sensor_id,distances,lcd_string);
 		
-		else if (distances[sensor_id]>=10 && distances[sensor_id]<100)
-		{
-			lcd_gotoxy(14,sensor_id);		//set position to hundrets
-			lcd_puts(" ");					//clear hundrets
-			lcd_gotoxy(15, sensor_id);		//set position to tenths
-		}
-		else
-		{
-			lcd_gotoxy(14, sensor_id);		//set position to hundrets
-		}
-		lcd_puts(lcd_string);				//display distance on lcd
+
 		
 		
 		//interesting info to uart

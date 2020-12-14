@@ -1,189 +1,268 @@
-#include "gpio.h"
-#include "project_setup.h"
+/*
+ * parkingsensor.c
+ *
+ * Created: 03.12.2020 13:33:19
+ * Author : Vori
+ */ 
+
+/* Includes ----------------------------------------------------------*/
+#ifndef F_CPU
+#define F_CPU 16000000
+#endif
+
+#include <avr/io.h>         // AVR device-specific IO definitions
+#include <avr/interrupt.h>  // Interrupts standard C library for AVR-GCC
+#include <stdlib.h>         // C library. Needed for conversion function
+#include <stdio.h>
+#include <util/delay.h>
+#include "uart.h"           // Peter Fleury's UART library
+#include "gpio.h"  
 #include "lcd.h"
-#include "lcd_definitions.h"
+#include "lcd_definitions.h"   
+
+#include "LED_setup.h"
 
 
-//initial configuration of pins
-void pins_config(void)
-{
-	//configure LED pins as output
-	GPIO_config_output(&DDRC,LED1);
-	GPIO_config_output(&DDRC,LED2);
-	GPIO_config_output(&DDRC,LED3);
-	GPIO_config_output(&DDRC,LED4);
-	GPIO_config_output(&DDRC,LED5);
-	GPIO_config_output(&DDRC,LED_BLINK); // ??????????
+
+ 
+
+#define Front_trigger PB3
+#define Back_trigger  PB2
+#define Front_Echo	  PD3
+#define Back_Echo	  PD2
+
+#define LED1		PC1
+#define LED2		PC2
+#define LED3		PC3
+#define LED4		PC4
+#define LED5		PC5
+#define LED_BLINK	PC0
 	
-	//configure sound pin as output
-	GPIO_config_output(&DDRB, alarm); 
-	
-	//configure echo pins as inputs without pull up resistor
-	GPIO_config_input_nopull(&DDRD, Front_Echo);
-	GPIO_config_input_nopull(&DDRD, Back_Echo);
-		
-	//configure trigger pins as outputs and set them to low
-	GPIO_config_output(&DDRB, Front_trigger);
-	GPIO_config_output(&DDRB, Back_trigger);
-	GPIO_write_low(&PORTB, Front_trigger);
-	GPIO_write_low(&PORTB, Back_trigger);
-	GPIO_write_low(&PORTB, LED_BLINK);
-		
-	//configure alarm as output and turn it off
-	GPIO_config_output(&DDRB, alarm);
-	GPIO_write_low(&PORTB, alarm);
-}
 
-void lcd_config(void)
+
+
+volatile uint8_t trigger_enable = 1;	//enables sending trigger(10us) pulse to sensor
+volatile uint8_t sensor_id = 0;		//selects sensor for which the main loop executes
+volatile float distances[] = {0,0};
+char lcd_string[50];
+
+//array of custom characters representing different stages of progress on one segment of load bar
+uint8_t customChar[] = {
+	// addr 0: .....
+	0b00000, 0b00000, 0b00000, 0b00000, 0b00000, 0b00000, 0b00000, 0b00000,
+	// addr 1: |....
+	0b10000, 0b10000, 0b10000, 0b10000, 0b10000, 0b10000, 0b10000, 0b10000,
+	// addr 2: ||...
+	0b11000, 0b11000, 0b11000, 0b11000, 0b11000, 0b11000, 0b11000, 0b11000,
+	// addr 3: |||..
+	0b11100, 0b11100, 0b11100, 0b11100, 0b11100, 0b11100, 0b11100, 0b11100,
+	// addr 4: ||||.
+	0b11110, 0b11110, 0b11110, 0b11110, 0b11110, 0b11110, 0b11110, 0b11110,
+	// addr 5: |||||
+	0b11111, 0b11111, 0b11111, 0b11111, 0b11111, 0b11111, 0b11111, 0b11111,
+};
+
+//defines function for load bar 
+void LoadBar(int distance);
+
+
+int main(void)
 {
-	//array of custom characters representing different stages of progress on one segment of load bar
-	uint8_t customChar[] = 
-	{
-		// addr 0: .....
-		0b00000, 0b00000, 0b00000, 0b00000, 0b00000, 0b00000, 0b00000, 0b00000,
-		// addr 1: |....
-		0b10000, 0b10000, 0b10000, 0b10000, 0b10000, 0b10000, 0b10000, 0b10000,
-		// addr 2: ||...
-		0b11000, 0b11000, 0b11000, 0b11000, 0b11000, 0b11000, 0b11000, 0b11000,
-		// addr 3: |||..
-		0b11100, 0b11100, 0b11100, 0b11100, 0b11100, 0b11100, 0b11100, 0b11100,
-		// addr 4: ||||.
-		0b11110, 0b11110, 0b11110, 0b11110, 0b11110, 0b11110, 0b11110, 0b11110,
-		// addr 5: |||||
-		0b11111, 0b11111, 0b11111, 0b11111, 0b11111, 0b11111, 0b11111, 0b11111,
-	};
-		
 	//initialize LCD, display strings that do not change
 	lcd_init(LCD_DISP_ON);
 	lcd_gotoxy(1, 0);
 	lcd_puts("dist_front:");
 	lcd_gotoxy(1, 2);
 	lcd_puts("dist_back :");
-		
+	
 	//set pointer at beginning of CGRAM
 	lcd_command(1 << LCD_CGRAM);
 	for (uint8_t i = 0; i < 48; i++)
-	{
-		// Store all new chars to memory line by line
-		lcd_data(customChar[i]);
-	}
-	
+		{
+			// Store all new chars to memory line by line
+			lcd_data(customChar[i]);
+		}
 	// Set DDRAM address
 	lcd_command(1 << LCD_DDRAM);
 	
 
-}
-
-//turn all LEDs off
-void LEDs_off(void)
-{
-	GPIO_write_low(&PORTC, LED1);
-	GPIO_write_low(&PORTC, LED2);
-	GPIO_write_low(&PORTC, LED3);
-	GPIO_write_low(&PORTC, LED4);
-	GPIO_write_low(&PORTC, LED5);
-}
-
-//togggles number of leds on led stripe
-void LED_toggle(int number_of_LEDs)
-{
-	switch(number_of_LEDs)
-	{
-		case 1:
-			GPIO_toggle(&PORTC, LED1);
-			break;
-		case 2:
-			GPIO_toggle(&PORTC, LED1);
-			GPIO_toggle(&PORTC, LED2);
-			break;
-		case 3:
-			GPIO_toggle(&PORTC, LED1);
-			GPIO_toggle(&PORTC, LED2);
-			GPIO_toggle(&PORTC, LED3);
-			break;
-		case 4:
-			GPIO_toggle(&PORTC, LED1);
-			GPIO_toggle(&PORTC, LED2);
-			GPIO_toggle(&PORTC, LED3);
-			GPIO_toggle(&PORTC, LED4);
-			break;
-		case 5:
-			GPIO_toggle(&PORTC, LED1);
-			GPIO_toggle(&PORTC, LED2);
-			GPIO_toggle(&PORTC, LED3);
-			GPIO_toggle(&PORTC, LED4);
-			GPIO_toggle(&PORTC, LED5);
-			break;
-	}
-}
-
-void Display_dist(uint8_t id, float dist[], char string[])
-{
-	if (dist[id]<10)
-	{
-		lcd_gotoxy(14,id);		//set position to hundrets
-		lcd_puts("  ");					//clear hundrets and tenths
-		lcd_gotoxy(16, id);		//go to ones
-	}
+	//initialize uart
+	uart_init(UART_BAUD_SELECT(9600,F_CPU));
 	
-	else if (dist[id]>=10 && dist[id]<100)
-	{
-		lcd_gotoxy(14,id);		//set position to hundrets
-		lcd_puts(" ");					//clear hundrets
-		lcd_gotoxy(15, id);		//set position to tenths
-	}
-	else
-	{
-		lcd_gotoxy(14, id);		//set position to hundrets
-	}
-	lcd_puts(string);				//display distance on lcd	
-}
-//update warning message based on smaller distance
-void Update_warning(int sm_dist)
-{
-
-	if (sm_dist>=400)
-	{
-		LEDs_off();
-		LED_toggle(1);
-		lcd_gotoxy(24, 2);
-		lcd_puts("ALL CLEAR!");
-	}
-
-	else if (sm_dist <= 400 && sm_dist > 200)
-	{
-		LEDs_off();
-		LED_toggle(2);
-		lcd_gotoxy(24, 2);
-		lcd_puts("ALL CLEAR!");
-	}
-	else if (sm_dist <= 200 && sm_dist > 100)
-	{
-		LEDs_off();
-		LED_toggle(3);
-		lcd_gotoxy(24, 2);
-		lcd_puts("PRIHORIVA!");
-	}
-
-	else if (sm_dist <= 100 && sm_dist > 50)
-	{
-		LEDs_off();
-		LED_toggle(4);
-		lcd_gotoxy(24, 2);
-		lcd_puts("!!!SLOW!!!");
-	}
-	else if (sm_dist <= 50 )
-	{
-		LEDs_off();
-		LED_toggle(5);
-		lcd_gotoxy(24, 2);
-		lcd_puts("!!!STOP!!!");
-	}
+	//configure echo pins as inputs without pull up resistor
+	GPIO_config_input_nopull(&DDRD, Front_Echo);
+	GPIO_config_input_nopull(&DDRD, Back_Echo);
 	
+	//configure trigger pins as outputs and set them to low
+	GPIO_config_output(&DDRB, Front_trigger);
+	GPIO_write_low(&PORTB, Front_trigger);
+	GPIO_config_output(&DDRB, Back_trigger);
+	GPIO_write_low(&PORTB, Back_trigger);
+	GPIO_write_low(&PORTB, LED_BLINK);
+	
+	LEDs_out();
+	LEDs_off();							// set all LED pins to low
+	
+	//Rising edge of INT1 generates an interrupt request
+	EICRA |= (1 << ISC11) | (1 << ISC10);   
+	EIMSK |= (1 << INT1);
+	
+	
+	//Rising edge of INT0 generates an interrupt request
+	EICRA |= (1 << ISC01) | (1 << ISC00);
+	EIMSK |= (1 << INT0);
+	
+	sei(); //enable interrupts
+	
+    while (1) 
+    {
+		if (trigger_enable==1)
+		{
+		   if (sensor_id == 1)
+		   {
+			    _delay_us(50);
+				//send start pulse (10us) to back sensor
+				GPIO_write_high(&PORTB,Back_trigger);
+				_delay_us(10);
+				GPIO_write_low(&PORTB,Back_trigger);
+				trigger_enable = 0;						//disable sending start pulse			   
+		   }
+		   else
+		   {
+			   _delay_us(50);
+				GPIO_write_high(&PORTB,Front_trigger);
+				_delay_us(10);
+				GPIO_write_low(&PORTB,Front_trigger);
+				trigger_enable = 0;						//disable sending start pulse
+		   }
+		}
 
+		int smaller_distance = 1;					//for saving the smaller distance of the 2 sensors
+	
+		if(distances[0] > distances[1])
+		{
+			smaller_distance = distances[1];	
+		}
+		else
+		{
+			smaller_distance = distances[0];	
+		}
+		//update load bar
+		LoadBar(smaller_distance);					
+			if (smaller_distance>=400)
+			{
+				LEDs_off();
+				LED_toggle(1);
+				lcd_gotoxy(24, 2);
+				lcd_puts("ALL CLEAR!");					
+			}
+
+			else if (smaller_distance <= 400 && smaller_distance > 200)
+			{
+				LEDs_off();
+				LED_toggle(2);
+				lcd_gotoxy(24, 2);
+				lcd_puts("ALL CLEAR!");
+			}
+
+			else if (smaller_distance <= 200 && smaller_distance > 100)
+			{
+				LEDs_off();
+				LED_toggle(3);
+				lcd_gotoxy(24, 2);
+				lcd_puts("PRIHORIVA!");			
+			}
+
+			else if (smaller_distance <= 100 && smaller_distance > 50)
+			{
+				LEDs_off();
+				LED_toggle(4);
+				lcd_gotoxy(24, 2);
+				lcd_puts("!!!SLOW!!!");				
+			}	
+			else if (smaller_distance <= 50 )
+			{
+				LEDs_off();
+				LED_toggle(5);
+				lcd_gotoxy(24, 2);
+				lcd_puts("!!!STOP!!!");
+			}							
+		
+		distances[sensor_id]=distances[sensor_id]*(0.15009);	//convert to cm
+		
+		itoa(distances[sensor_id], lcd_string, 10);				// Convert decimal value to string
+		
+		if (distances[sensor_id]<10)
+		{
+			lcd_gotoxy(14,sensor_id);		//set position to hundrets
+			lcd_puts("  ");					//clear hundrets and tenths
+			lcd_gotoxy(16, sensor_id);		//go to ones
+		}
+		
+		else if (distances[sensor_id]>=10 && distances[sensor_id]<100)
+		{
+			lcd_gotoxy(14,sensor_id);		//set position to hundrets
+			lcd_puts(" ");					//clear hundrets
+			lcd_gotoxy(15, sensor_id);		//set position to tenths
+		}
+		else
+		{
+			lcd_gotoxy(14, sensor_id);		//set position to hundrets
+		}
+		lcd_puts(lcd_string);		//display distance
+		
+		//interesting info to uart
+		if (distances[0]<100 && distances[1]<100)
+		{
+			uart_puts("Obstacles in front and back!\n");
+		}
+		else if (distances[0]<100)
+		{
+			uart_puts("Obstacle in front!\n");
+		}
+		else if (distances[1]<100)
+		{
+			uart_puts("Obstacle in back!\n");
+		}
+		else
+		{
+			uart_puts("No obstacle nearby!\n");
+		}	
+		
+		//change sensor id for next loop
+		if (sensor_id==0)
+		{
+			sensor_id=1;
+		}
+		else
+		{
+			sensor_id=0;
+		}		
+	}
+					
+    	
 }
 
-//displays bar on lcd based on the smaller distance 
+//interrupt iterates as long as echo signal from front sensor is 1
+ISR(INT1_vect){
+	do
+	{
+		distances[0]++;					//keep counting
+	} while (GPIO_read(&PIND,Front_Echo));	//until echo is 0
+	trigger_enable=1;						//enable trigger
+}
+
+//interrupt iterates as long as echo signal from back sensor is 1
+ISR(INT0_vect){
+	do
+	{
+		distances[1]++;					//keep counting
+	} while (GPIO_read(&PIND,Back_Echo));	//until echo is 0
+	trigger_enable=1;						//enable trigger
+}
+
+
+//displays bar on lcd based on the smaller distance
 void LoadBar(int distance){
 	if (distance>=500)
 	{
@@ -193,17 +272,17 @@ void LoadBar(int distance){
 	else if (distance<=500 && distance>490)
 	{
 		lcd_gotoxy(20,0);
-		lcd_putc(1);
+		lcd_putc(1);		
 		lcd_gotoxy(21,0);
 		lcd_puts("                    ");
-	}
+	}	
 	else if (distance<=490 && distance>480)
 	{
 		lcd_gotoxy(20,0);
 		lcd_putc(2);
 		lcd_gotoxy(21,0);
 		lcd_puts("                    ");
-	}
+	}	
 	else if (distance<=480 && distance>470)
 	{
 		lcd_gotoxy(20,0);
@@ -217,7 +296,7 @@ void LoadBar(int distance){
 		lcd_putc(4);
 		lcd_gotoxy(21,0);
 		lcd_puts("                    ");
-	}
+	}	
 	else if (distance<=460 && distance>450)
 	{
 		lcd_gotoxy(20,0);
@@ -242,7 +321,7 @@ void LoadBar(int distance){
 		lcd_putc(2);
 		lcd_gotoxy(22,0);
 		lcd_puts("                   ");
-	}
+	}	
 	else if (distance<=440 && distance>430)
 	{
 		lcd_gotoxy(20,0);
@@ -251,7 +330,7 @@ void LoadBar(int distance){
 		lcd_putc(3);
 		lcd_gotoxy(22,0);
 		lcd_puts("                   ");
-	}
+	}	
 	else if (distance<=430 && distance>420)
 	{
 		lcd_gotoxy(20,0);
@@ -260,7 +339,7 @@ void LoadBar(int distance){
 		lcd_putc(4);
 		lcd_gotoxy(22,0);
 		lcd_puts("                   ");
-	}
+	}	
 	else if (distance<=420 && distance>410)
 	{
 		lcd_gotoxy(20,0);
@@ -280,7 +359,7 @@ void LoadBar(int distance){
 		lcd_putc(1);
 		lcd_gotoxy(23,0);
 		lcd_puts("                  ");
-	}
+	}	
 	else if (distance<=400 && distance>390)
 	{
 		lcd_gotoxy(20,0);
@@ -389,7 +468,7 @@ void LoadBar(int distance){
 		lcd_putc(5);
 		lcd_gotoxy(24,0);
 		lcd_puts("                 ");
-	}
+	}	
 	else if (distance<=310 && distance>300)
 	{
 		lcd_gotoxy(20,0);
@@ -401,7 +480,7 @@ void LoadBar(int distance){
 		lcd_gotoxy(23,0);
 		lcd_putc(5);
 		lcd_gotoxy(24,0);
-		lcd_putc(1);
+		lcd_putc(1);		
 		lcd_gotoxy(25,0);
 		lcd_puts("                ");
 	}
@@ -478,7 +557,7 @@ void LoadBar(int distance){
 		lcd_gotoxy(24,0);
 		lcd_putc(5);
 		lcd_gotoxy(25,0);
-		lcd_putc(1);
+		lcd_putc(1);		
 		lcd_gotoxy(26,0);
 		lcd_puts("               ");
 	}
@@ -565,7 +644,7 @@ void LoadBar(int distance){
 		lcd_gotoxy(25,0);
 		lcd_putc(5);
 		lcd_gotoxy(26,0);
-		lcd_putc(1);
+		lcd_putc(1);		
 		lcd_gotoxy(27,0);
 		lcd_puts("              ");
 	}
@@ -662,7 +741,7 @@ void LoadBar(int distance){
 		lcd_gotoxy(26,0);
 		lcd_putc(5);
 		lcd_gotoxy(27,0);
-		lcd_putc(1);
+		lcd_putc(1);	
 		lcd_gotoxy(28,0);
 		lcd_puts("             ");
 	}
@@ -769,7 +848,7 @@ void LoadBar(int distance){
 		lcd_gotoxy(27,0);
 		lcd_putc(5);
 		lcd_gotoxy(28,0);
-		lcd_putc(1);
+		lcd_putc(1);		
 		lcd_gotoxy(29,0);
 		lcd_puts("            ");
 	}
@@ -795,7 +874,7 @@ void LoadBar(int distance){
 		lcd_putc(2);
 		lcd_gotoxy(29,0);
 		lcd_puts("            ");
-	}
+	}	
 	else if (distance<=90 && distance>80)
 	{
 		lcd_gotoxy(20,0);
@@ -886,7 +965,7 @@ void LoadBar(int distance){
 		lcd_gotoxy(28,0);
 		lcd_putc(5);
 		lcd_gotoxy(29,0);
-		lcd_putc(1);
+		lcd_putc(1);		
 		lcd_gotoxy(30,0);
 		lcd_puts("           ");
 	}
@@ -989,5 +1068,5 @@ void LoadBar(int distance){
 		lcd_putc(5);
 		lcd_gotoxy(30,0);
 		lcd_puts("           ");
-	}
+	}																																								
 }
