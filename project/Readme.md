@@ -56,7 +56,7 @@ project_functions.c:
 
 <h3> Flow chart</h3>
 
-![logic](../Images/flowchart_parkings1.png)
+![logic](../Images/flowchartfinal.png)
 
 
 
