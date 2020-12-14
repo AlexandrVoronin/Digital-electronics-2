@@ -20,6 +20,7 @@
 #include "lcd.h"
 #include "lcd_definitions.h"   
 #include "project_setup.h"
+#include "project_functions.h"
 #include "timer.h"
 
 
@@ -95,7 +96,7 @@ int main(void)
 		}
 		
 		//update load bar based on smaller distance
-		LoadBar(smaller_distance);	
+		Load_bar(smaller_distance);	
 		
 		//update warning message based on smaller distance				
 		Update_warning(smaller_distance);					

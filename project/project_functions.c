@@ -12,7 +12,7 @@
 //display distances to sensor[id]
 
 
-void Display_dist(uint8_t id, float dist[], char string[])
+void Display_dist(uint8_t id,volatile float dist[], char string[])
 {
 	if (dist[id]<10)
 	{
@@ -77,7 +77,7 @@ void Update_warning(int sm_dist)
 	
 
 }
-void Uart_info(float dist[]){
+void Uart_info(volatile float dist[]){
 		if (dist[0]<100 && dist[1]<100)
 		{
 			uart_puts("Obstacles in front and back!\n");
@@ -96,7 +96,7 @@ void Uart_info(float dist[]){
 		}	
 }
 //displays bar on lcd based on the smaller distance
-void LoadBar(int distance){
+void Load_bar(int distance){
 	if (distance>=500)
 	{
 		lcd_gotoxy(20,0);
