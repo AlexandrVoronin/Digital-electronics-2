@@ -23,10 +23,7 @@ Authors: Alexandr Voronin, Richard Šebo
 | `LoadBar` | `int distance` | Displays loading bar on LCD based on the smaller distance |
 | `Display_dist` | `uint8_t id`, `float dist[]`, `char string[]` | Displays front and back distance on LCD | 
 | `Update_warning` | `int sm_dist` | Displays warning messages on LCD |
-
-| **Function name** | **Function parameters** | **Description** |
-| :-- | :-- | :-- | :-- |
-| `lcd_init` | `LCD_DISP_OFF`<br>`LCD_DISP_ON`<br>`LCD_DISP_ON_CURSOR`<br>`LCD_DISP_ON_CURSOR_BLINK` | Display off; |
+| `lcd_init` | `LCD_DISP_OFF`<br>`LCD_DISP_ON`<br>`LCD_DISP_ON_CURSOR`<br>`LCD_DISP_ON_CURSOR_BLINK` | Display off |
 | `lcd_clrscr` | - |Clear display and set cursor to home position. |
 | `lcd_gotoxy` | `uint8_t x` <br> `uint8_t y`  |Set cursor to specified position. |
 | `lcd_putc` | `char 	c` | Display character at current cursor position.|
