@@ -19,13 +19,13 @@ Authors: Alexandr Voronin, Richard Šebo
 [main.c](main.c) consists of:
 1. Import of libraries
 2. Global variables initialization
-3. main function body:
+3. Main function body:
 
 
 	a) Initial settings:
-	  - Configuration and initialization of the LCD display and pins
+	  - Initialization of the LCD display and pins
 	  - Enable and initialize Timer2 overflow
-	  - Configuration of external interrupt, rising edge of INT1 or INT0 generates an interrupt request for either the front or the back sensor
+	  - Configuration of external interrupt so that, rising edge of INT1 or INT0 generates an interrupt request for either the front or the back sensor.
    
    
 	b) Infinite loop while(1):
@@ -43,25 +43,6 @@ Authors: Alexandr Voronin, Richard Šebo
 - This ISR is used for sound alarm when an obstacle is close
 - In the first step, the closer of the 2 distances is chosen
 - Timer overflow is changed depending on the distance, this changes the frequency of sound signalisation
-
-
-project_setup.c:
-- Functions used for configuration of the pins and LCD display, functions for controling LEDs (see functions table)
-
-project_functions.c:
-- Functions used for displaying and updating the distance, loading bar and warnings on LCD and UART information (see functions table)
-
-
-4. ISR(INT1_vect) and ISR(INT0_vect)
-- These ISRs are used for getting the distance to an obstacle, each sensor uses its own ISR
-- As long as echo signal from either sensor is 1, iterate the distance
-- Set trigger_enable to 1, this allows sending another pulse in main body infinite loop
-
-5. ISR(TIMER2_OVF_vect)
-- This ISR is used for sound alarm when an obstacle is close
-- In the first step, the closer of the 2 distances is chosen
-- Timer overflow is changed depending on the distance, this changes the frequency of sound signalisation
-
 
 
 project_setup.c:
