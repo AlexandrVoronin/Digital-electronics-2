@@ -15,9 +15,9 @@ Authors: Alexandr Voronin, Richard Šebo
 
 <h2> Code description </h2>
 main.c consists of:
-- Import of libraries
-- Global variables initialization
-- main function body:
+1. Import of libraries
+2. Global variables initialization
+2. main function body:
 	a) Initial settings:
 	  - Configuration and initialization of the LCD display and pins
 	  - Enable and initialize Timer2 overflow
