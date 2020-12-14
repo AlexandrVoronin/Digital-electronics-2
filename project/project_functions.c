@@ -9,9 +9,8 @@
 #include "lcd.h"
 #include "project_functions.h"
 #include "uart.h"
+
 //display distances to sensor[id]
-
-
 void Display_dist(uint8_t id,volatile float dist[], char string[])
 {
 	if (dist[id]<10)
@@ -33,13 +32,15 @@ void Display_dist(uint8_t id,volatile float dist[], char string[])
 	}
 	lcd_puts(string);				//display distance on lcd
 }
+
 //update warning message based on smaller distance
 void Update_warning(int sm_dist)
-{
+{	
+	LEDs_off();
 
 	if (sm_dist>=400)
 	{
-		LEDs_off();
+		
 		LED_toggle(1);
 		lcd_gotoxy(24, 2);
 		lcd_puts("ALL CLEAR!");
@@ -47,14 +48,12 @@ void Update_warning(int sm_dist)
 
 	else if (sm_dist <= 400 && sm_dist > 200)
 	{
-		LEDs_off();
 		LED_toggle(2);
 		lcd_gotoxy(24, 2);
 		lcd_puts("ALL CLEAR!");
 	}
 	else if (sm_dist <= 200 && sm_dist > 100)
 	{
-		LEDs_off();
 		LED_toggle(3);
 		lcd_gotoxy(24, 2);
 		lcd_puts("PRIHORIVA!");
@@ -62,14 +61,12 @@ void Update_warning(int sm_dist)
 
 	else if (sm_dist <= 100 && sm_dist > 50)
 	{
-		LEDs_off();
 		LED_toggle(4);
 		lcd_gotoxy(24, 2);
 		lcd_puts("!!!SLOW!!!");
 	}
 	else if (sm_dist <= 50 )
 	{
-		LEDs_off();
 		LED_toggle(5);
 		lcd_gotoxy(24, 2);
 		lcd_puts("!!!STOP!!!");
@@ -77,23 +74,25 @@ void Update_warning(int sm_dist)
 	
 
 }
+
+//display info about obstacles in front/back/both
 void Uart_info(volatile float dist[]){
-		if (dist[0]<100 && dist[1]<100)
-		{
-			uart_puts("Obstacles in front and back!\n");
-		}
-		else if (dist[0]<100)
-		{
-			uart_puts("Obstacle in front!\n");
-		}
-		else if (dist[1]<100)
-		{
-			uart_puts("Obstacle in back!\n");
-		}
-		else
-		{
-			uart_puts("No obstacle nearby!\n");
-		}	
+	if (dist[0]<100 && dist[1]<100)
+	{
+		uart_puts("Obstacles in front and back!\n");
+	}
+	else if (dist[0]<100)
+	{
+		uart_puts("Obstacle in front!\n");
+	}
+	else if (dist[1]<100)
+	{
+		uart_puts("Obstacle in back!\n");
+	}
+	else
+	{
+		uart_puts("No obstacle nearby!\n");
+	}
 }
 //displays bar on lcd based on the smaller distance
 void Load_bar(int distance){
