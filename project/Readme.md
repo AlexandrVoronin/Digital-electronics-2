@@ -14,11 +14,12 @@ Authors: Alexandr Voronin, Richard Šebo
 <h2> Code description </h2>
 <h3> User Interface </h3>
 
-
 | **function** | **input** | **output** |**Description**|
 | :-: | :-: | :-: | :-- | 
-| `  | | |   |
-|   |  | ||
-| |   |  ||
+|  lcd_config | - | - | Creates and stores custom character for the loading bar, initializes LCD (display strings which do not change), sets pointer at the beginning of CGRAM and sets DDRAM adress  |
+|  pins_config | - | - | Configures and initializes LED, alarm, echo and trigger pins |
+| LEDs_off | - | - | Sets all LED pins to logic low |
+| LED_toggle | int number_of_LEDs | - | Toggle 1 up to 5 LEDs |
+| LoadBar | int distance | - | Displays loading bar on LCD based on the smaller distance |
 
 
