@@ -9,8 +9,8 @@ Authors: Alexandr Voronin, Richard Šebo
 <p>Application was brought to life using Atmega328p, 8-bit microchip controller. It has 21 GPIO pins accessed through registers PORTB,PORTC,PORTD. We are using external interrupt pins (PD3,PD2) for echo signals and I/O pins (PB3,PB2) for sending trigger signal to the sensor. I/0 ports PC1-5 are used for the led stripe output. I/0 pin PB4 is used for output to led replacing audio signaling by blinking in different frequencies. Freqeuncies are generated based on different overflow times for internal timer overflow. For LCD pins PD4-7 are used for data ports, pin PB0 asi RS pin and port PB1 as E pin. </p>
  
 <h2> Software description </h3>
-SimulIDE: Simple real time electronic circuit simulator, with acces to atmega328p
-Atmel Studio: Integrated Development Environment (IDE) for developing and debugging AVR® and SAM microcontroller applications
+<p>SimulIDE: Simple real time electronic circuit simulator, with acces to atmega328p</p>
+<p>Atmel Studio: Integrated Development Environment (IDE) for developing and debugging AVR® and SAM microcontroller applications</p>
 
 
 <h2> Code description </h2>
