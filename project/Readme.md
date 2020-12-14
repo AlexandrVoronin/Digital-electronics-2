@@ -14,12 +14,27 @@ Authors: Alexandr Voronin, Richard Šebo
 <h2> Code description </h2>
 <h3> User Interface </h3>
 
-| **function** | **input** | **output** |**Description**|
+| **Function name** | **Function parameters** | **Description** |
 | :-: | :-: | :-: | :-- | 
-|  lcd_config | - | - | Creates and stores custom character for the loading bar, initializes LCD (display strings which do not change), sets pointer at the beginning of CGRAM and sets DDRAM adress  |
-|  pins_config | - | - | Configures and initializes LED, alarm, echo and trigger pins |
-| LEDs_off | - | - | Sets all LED pins to logic low |
-| LED_toggle | int number_of_LEDs | - | Toggle 1 up to 5 LEDs |
-| LoadBar | int distance | - | Displays loading bar on LCD based on the smaller distance |
+|  `lcd_config` | - | Creates and stores custom character for the loading bar, initializes LCD (display strings which do not change), sets pointer at the beginning of CGRAM and sets DDRAM adress  |
+| `pins_config` | - | Configures and initializes LED, alarm, echo and trigger pins |
+| `LEDs_off` | - | Sets all LED pins to logic low |
+| `LED_toggle` | `int number_of_LEDs` | Toggle 1 up to 5 LEDs |
+| `LoadBar` | `int distance` | Displays loading bar on LCD based on the smaller distance |
+| `Display_dist` | `uint8_t id`, `float dist[]`, `char string[]` | Displays front and back distance on LCD | 
+| `Update_warning` | `int sm_dist` | Displays warning messages on LCD |
 
+| **Function name** | **Function parameters** | **Description** |
+| :-- | :-- | :-- | :-- |
+| `lcd_init` | `LCD_DISP_OFF`<br>`LCD_DISP_ON`<br>`LCD_DISP_ON_CURSOR`<br>`LCD_DISP_ON_CURSOR_BLINK` | Display off&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br>&nbsp;<br>&nbsp;<br>&nbsp; |
+| `lcd_clrscr` | - |Clear display and set cursor to home position. |
+| `lcd_gotoxy` | `uint8_t x` <br> `uint8_t y`  |Set cursor to specified position. |
+| `lcd_putc` | `char 	c` | Display character at current cursor position.|
+| `lcd_puts` | `const char * 	s` | Display string without auto linefeed.|
+| `lcd_command` | `uint8_t 	cmd` |Send LCD controller instruction command. |
+| `lcd_data` | `uint8_t 	data` |Send data byte to LCD controller.Similar to lcd_putc(), but without interpreting LF |
+| `uart_init` | `UART_BAUD_SELECT(9600, F_CPU)` | Initialize UART to 8N1 and set baudrate to 9600&nbsp;Bd |
+| `uart_getc` | `none(void)`  |  Get received byte from ringbuffer &nbsp;Bd |
+| `uart_putc` | `unsigned char data`  | Put byte to ringbuffer for transmitting via UART. |
+| `uart_puts` | `const char* s` | Put string to ringbuffer for transmitting via UART. |
 
