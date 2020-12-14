@@ -14,6 +14,10 @@ Authors: Alexandr Voronin, Richard Šebo
 
 
 <h2> Code description </h2>
+<h3> Flow chart</h3>
+
+![logic](../../Images/flowachart_parkings.png)
+
 <h3> Function documentation </h3>
 
 | **Function name** | **Function parameters** | **Description** |
