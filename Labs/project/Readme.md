@@ -1,7 +1,7 @@
 <h1> Project DE-2 </h1>
 Authors: Alexandr Voronin, Richard Šebo
 <h2> Project objectives </h2>
-<p>Application of parking assistant using two HC-SR04 sensors. Output interface:LCD, frequency audio, led </p>
+<p>Application of parking assistant using two HC-SR04 sensors. Output interface:LCD, frequency audio, led stripe</p>
 <h2> Hardware description </h3>
 <p></p>
 
