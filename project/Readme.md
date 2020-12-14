@@ -15,7 +15,7 @@ Authors: Alexandr Voronin, Richard Šebo
 <h3> User Interface </h3>
 
 | **Function name** | **Function parameters** | **Description** |
-| :-: | :-: | :-: | :-- | 
+| :-: | :-: | :-: | 
 |  `lcd_config` | - | Creates and stores custom character for the loading bar, initializes LCD (display strings which do not change), sets pointer at the beginning of CGRAM and sets DDRAM adress  |
 | `pins_config` | - | Configures and initializes LED, alarm, echo and trigger pins |
 | `LEDs_off` | - | Sets all LED pins to logic low |
@@ -23,7 +23,10 @@ Authors: Alexandr Voronin, Richard Šebo
 | `LoadBar` | `int distance` | Displays loading bar on LCD based on the smaller distance |
 | `Display_dist` | `uint8_t id`, `float dist[]`, `char string[]` | Displays front and back distance on LCD | 
 | `Update_warning` | `int sm_dist` | Displays warning messages on LCD |
-| `lcd_init` | `LCD_DISP_OFF`<br>`LCD_DISP_ON`<br>`LCD_DISP_ON_CURSOR`<br>`LCD_DISP_ON_CURSOR_BLINK` | Display off |
+
+| **Function name** | **Function parameters** | **Description** |
+| :-- | :-- | :-- | 
+| `lcd_init` | `LCD_DISP_OFF`<br>`LCD_DISP_ON`<br>`LCD_DISP_ON_CURSOR`<br>`LCD_DISP_ON_CURSOR_BLINK` | Display off&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br>&nbsp;<br>&nbsp;<br>&nbsp; |
 | `lcd_clrscr` | - |Clear display and set cursor to home position. |
 | `lcd_gotoxy` | `uint8_t x` <br> `uint8_t y`  |Set cursor to specified position. |
 | `lcd_putc` | `char 	c` | Display character at current cursor position.|
@@ -34,4 +37,11 @@ Authors: Alexandr Voronin, Richard Šebo
 | `uart_getc` | `none(void)`  |  Get received byte from ringbuffer &nbsp;Bd |
 | `uart_putc` | `unsigned char data`  | Put byte to ringbuffer for transmitting via UART. |
 | `uart_puts` | `const char* s` | Put string to ringbuffer for transmitting via UART. |
+| `GPIO_config_output` | `volatile uint8_t *reg_name, uint8_t pin_num` | Configure one output pin in Data Direction Register |
+| `GPIO_config_input_nopull` | `volatile uint8_t *reg_name, uint8_t pin_num` | Configure one input pin in DDR without pull-up resistor |
+| `GPIO_config_input_pullup` | `volatile uint8_t *reg_name, uint8_t pin_num` | Configure one input pin in DDR and enable pull-up resistor |
+| `GPIO_write_low` | `volatile uint8_t *reg_name, uint8_t pin_num` | Set one output pin in PORT register to low |
+| `GPIO_write_high` | `volatile uint8_t *reg_name, uint8_t pin_num` | Set one output pin in PORT register to high |
+| `GPIO_toggle` | `volatile uint8_t *reg_name, uint8_t pin_num` | Toggle one output pin value in PORT register |
+| `GPIO_read` | `volatile uint8_t *reg_name, uint8_t pin_num` | Get input pin value from PIN register, returns `uint8_t` |
 
