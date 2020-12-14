@@ -18,7 +18,7 @@ Authors: Alexandr Voronin, Richard Šebo
 
 ![logic](../Images/flowchart_parkings1.png)
 
-<h3> Simulation screem</h3>
+<h3> Simulation screen</h3>
 
 ![logic](../Images/zapojeniprojekt.PNG)
 
