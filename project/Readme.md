@@ -16,7 +16,7 @@ Authors: Alexandr Voronin, Richard Šebo
 <h2> Code description </h2>
 
 
-![logic](main.c) consists of:
+![logic][main](main.c) consists of:
 1. Import of libraries
 2. Global variables initialization
 3. main function body:
