@@ -23,8 +23,9 @@ Authors: Alexandr Voronin, Richard Šebo
 | `LEDs_off` | - | Sets all LED pins to logic low |
 | `LED_toggle` | `int number_of_LEDs` | Toggle 1 up to 5 LEDs |
 | `LoadBar` | `int distance` | Displays loading bar on LCD based on the smaller distance |
-| `Display_dist` | `uint8_t id`, `float dist[]`, `char string[]` | Displays front and back distance on LCD | 
+| `Display_dist` | `uint8_t id`, `volatile float dist[]`, `char string[]` | Displays front and back distance on LCD | 
 | `Update_warning` | `int sm_dist` | Displays warning messages on LCD |
+| `Uart_info` | `volatile float dist []` | Displays warning messages via UART |
 
 | **Function name** | **Function parameters** | **Description** |
 | :-- | :-- | :-- | 
@@ -45,5 +46,4 @@ Authors: Alexandr Voronin, Richard Šebo
 | `GPIO_write_low` | `volatile uint8_t *reg_name, uint8_t pin_num` | Set one output pin in PORT register to low |
 | `GPIO_write_high` | `volatile uint8_t *reg_name, uint8_t pin_num` | Set one output pin in PORT register to high |
 | `GPIO_toggle` | `volatile uint8_t *reg_name, uint8_t pin_num` | Toggle one output pin value in PORT register |
-| `GPIO_read` | `volatile uint8_t *reg_name, uint8_t pin_num` | Get input pin value from PIN register, returns `uint8_t` |
-
+| `GPIO_read` | `volatile uint8_t *reg_name, uint8_t pin_num` | Get input pin value from PIN register, returns `uint8_t
