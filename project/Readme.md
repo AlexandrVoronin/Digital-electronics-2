@@ -17,16 +17,8 @@ Authors: Alexandr Voronin, Richard Šebo
 main.c consists of:
 1. Import of libraries
 2. Global variables initialization
-2. main function body:
-	a) Initial settings:
-	  - Configuration and initialization of the LCD display and pins
-	  - Enable and initialize Timer2 overflow
-	  - Configuration of external interrupt, rising edge of INT1 or INT0 generates an interrupt request for either the front or the back sensor
-	b) Infinite loop while(1):
-	  - If trigger_enable equals 1 (set to 1 as initial value or by ISR), ultrasonic wave is sent by one of the sensors and trigger_enable is set to 0
-	  - Save the closer of the 2 distances to a local variable
-	  - Update loading bar, LCD warning and UART information - loading bar and warning always represent the sensor which is closer to an obstacle
-	  - Change sensor for the next loop
+2. main function body
+
 
 4. ISR(INT1_vect) and ISR(INT0_vect)
 - These ISRs are used for getting the distance to an obstacle, each sensor uses its own ISR
