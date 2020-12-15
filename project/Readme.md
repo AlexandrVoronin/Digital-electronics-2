@@ -70,6 +70,8 @@ Electronic device used for displaying ASCII text. It offers various display size
 [project_functions.c](project_functions.c):
 - Functions used for displaying and updating the distance, loading bar and warnings on LCD and UART information (see functions table)
 
+[uart.c](uart.c):
+- commands for uart protocol (see functions table)
 
 <h3> Flow chart</h3>
 
