@@ -141,7 +141,7 @@ Electronic device used for displaying ASCII text. It offers various display size
 
 ## References
 
-1. https://components101.com/ultrasonic-sensor-working-pinout-datasheet (Complete Guide for Ultrasonic Sensor HC-SR04)
+1. https://components101.com/sites/default/files/component_datasheet/HCSR04%20Datasheet.pdf)
 2. https://sites.google.com/site/qeewiki/books/avr-guide/external-interrupts-on-the-atmega328
 3. https://maxpromer.github.io/LCD-Character-Creator/
 4. https://www.microchip.com/wwwproducts/en/ATmega328p
