@@ -133,9 +133,6 @@
     </ToolchainSettings>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="CFile1.c">
-      <SubType>compile</SubType>
-    </Compile>
     <Compile Include="gpio.c">
       <SubType>compile</SubType>
     </Compile>
@@ -151,13 +148,22 @@
     <Compile Include="lcd_definitions.h">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="LED_setup.c">
+    <Compile Include="project_functions.c">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="LED_setup.h">
+    <Compile Include="project_functions.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="project_setup.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="project_setup.h">
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="main.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="timer.h">
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="uart.c">
