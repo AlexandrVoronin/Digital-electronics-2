@@ -16,7 +16,7 @@ Richard Šebo, link to github repository: https://github.com/richar-d/Digital-el
 ![logic](../Images/hcsr04.PNG)
 
 <h3> Atmega328p </h3>
-<p>Application was brought to life using Atmega328p, 8-bit microchip controller. It has 21 GPIO pins accessed through registers PORTB,PORTC,PORTD. We are using external interrupt pins (PD3,PD2) for echo signals and I/O pins (PB3,PB2) for sending trigger signal to the sensor. I/0 ports PC1-5 are used for the led stripe output. I/0 pin PB4 is used for output to led replacing audio signaling by blinking in different frequencies based on smaller distance. Freqeuncies are generated based on different overflow times for internal timer overflow. For LCD pins PD4-7 are used for data ports, pin PB0 asi RS pin and port PB1 as E pin. </p>
+<p>Application was brought to life using Atmega328p, 8-bit microchip controller. It has 21 GPIO pins accessed through registers PORTB,PORTC,PORTD. We are using external interrupt pins (PD3,PD2) for echo signals and I/O pins (PB3,PB2) for sending trigger signal to the sensor. I/0 pins PC1-5 are used for the led stripe output. I/0 pin PB4 is used for output to led replacing audio signaling by blinking in different frequencies based on smaller distance. Freqeuncies are generated based on different overflow times for internal timer overflow. For LCD pins PD4-7 are used for data ports, pin PB0 asi RS pin and port PB1 as E pin. </p>
 <h3> LCD </h3>
 Electronic device used for displaying ASCII text. It offers various display sizes. We are using 20x4. It is capable of operating i 8-bit mode, however 4-bit mode is more appropriate for mcu since only 6-7 pins are neede compared to 11pins with 8-bit. The 6 pin interface we are using consists of:
 
