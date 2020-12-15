@@ -33,7 +33,7 @@ int main(void)
 	
 	uart_init(UART_BAUD_SELECT(9600,F_CPU));	//initialize UART		
 	
-	pins_config();	//initial configuration of pins
+	pins_config();		//initial configuration of pins
 						
 	LEDs_off();		//turn LEDs off				
 	
@@ -55,20 +55,20 @@ int main(void)
     	{	
 		if (sensor_id == 1)
 		{
-			_delay_ms(60);							//ensure one cycle lasts at least 60 ms
+			_delay_ms(60);				//ensure one cycle lasts at least 60 ms
 			GPIO_write_high(&PORTB,Back_trigger);	//
-			_delay_us(10);							//send start pulse (10us) to back sensor
+			_delay_us(10);				//send start pulse (10us) to back sensor
 			GPIO_write_low(&PORTB,Back_trigger);	//		   
 		}
 		else
 		{
-			_delay_ms(60);							//ensure one cycle lasts at least 60 ms			
+			_delay_ms(60);				//ensure one cycle lasts at least 60 ms			
 			GPIO_write_high(&PORTB,Front_trigger);	//
-			_delay_us(10);							//send start pulse (10us) to front sensor
+			_delay_us(10);				//send start pulse (10us) to front sensor
 			GPIO_write_low(&PORTB,Front_trigger);	//
 		}
 
-		int smaller_distance = 1;	//for saving the smaller distance of the 2 sensors
+		int smaller_distance = 1;			//for saving the smaller distance of the 2 sensors
 		
 		//choose smaller distance
 		if(distances[0] > distances[1])
@@ -89,7 +89,7 @@ int main(void)
 	
 		distances[sensor_id]=distances[sensor_id]*(0.15085);	//convert to cm
 		
-		itoa(distances[sensor_id], lcd_string, 10);		// Convert decimal value to string
+		itoa(distances[sensor_id], lcd_string, 10);		//convert decimal value to string
 		
 		Display_dist(sensor_id,distances,lcd_string);		//display distance on lcd
 		
