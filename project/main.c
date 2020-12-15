@@ -129,12 +129,6 @@ ISR(TIMER2_OVF_vect)
 {
 	int freq = 50;  //for saving closer distance
 	
-	//flick the led if in range for flicking
-	if (freq<=100)
-	{
-		GPIO_toggle(&PORTB, alarm);
-	}	
-	
 	//choose smaller distance
 	if(distances[0] >= distances[1])
 	{
@@ -144,6 +138,12 @@ ISR(TIMER2_OVF_vect)
 	{
 		freq = distances[0];
 	}
+	
+	//flick the led if in range for flicking
+	if (freq<=100)
+	{
+		GPIO_toggle(&PORTB, alarm);
+	}	
 	
 	//select frequency of signal led based on smaller distance
 	if (freq <= 100 && freq > 75)
