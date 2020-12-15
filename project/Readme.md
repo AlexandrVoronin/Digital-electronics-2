@@ -11,12 +11,11 @@ Authors: Alexandr Voronin, Richard Šebo
 Electronic device used for displaying ASCII text. It offers various display sizes. We are using 20x4. It is capable of operating i 8-bit mode, however 4-bit mode is more appropriate for mcu since only 6-7 pins are neede compared to 11pins with 8-bit. The 6 pin interface we are using consists of:
 
 -RS  register select. Selects the data or instruction register inside the HD44780,
-	
 	- RS=0, when a command is given
-	
 	- RS=1, when data is sent
 	
 -E  enable. This loads the data into the HD44780 on the falling edge,
+
 -D7:4 Upper nibble used in 4-bit mode.
 
 <h3> Scheme screen</h3>
