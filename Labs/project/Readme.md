@@ -16,14 +16,14 @@ Richard Šebo, link to github repository: https://github.com/richar-d/Digital-el
 <h3> HC-SR04 </h3>
 <p>HC-SR04 is a distance measuring sensor with range from 2cm to 4m. It has 4 pins: Vcc, Gnd, trigger, echo. To start its function it must first recieve pulse of at least 10us to the trigger pin. Sensor then transmits a sonic burst of eight pulses at 40 KHz. This pattern makes the signal unique, which allows it to differentiate between emitted signal and ambient noise. The echo pin is set to high and if the pulses are not reflected back it times out after 38ms  and is set to low (no obstacle in range). If the pulses are reflected, echo is set to low when the signal is received producing pulse with width between 150 µS to 25 mS based on how long it took the signal to come back. Based on that and knowing the speed of sound we can calculate the distance between the sensor and object that reflected the original pulses. In our program we let the MCU itterate as fast as it can as long as echo is HIGH, and then convert to distance by multiplying the result with precalculated constant</p>
 
-![logic](../Images/hcsr042.PNG)
+![logic](../../Images/hcsr042.PNG)
 
 <h3> Atmega328p </h3>
 <p>Application was brought to life using Atmega328p, 8-bit microchip controller. It has 21 GPIO pins accessed through registers PORTB,PORTC,PORTD. We are using external interrupt pins (PD3,PD2) for echo signals and I/O pins (PB3,PB2) for sending trigger signal to the sensor. I/0 pins PC1-5 are used for the led stripe output. I/0 pin PB4 is used for output to led replacing audio signaling by blinking in different frequencies based on smaller distance. Freqeuncies are generated based on different overflow times for internal timer overflow. For LCD pins PD4-7 are used for data ports, pin PB0 asi RS pin and port PB1 as E pin. </p>
 <h3> LCD </h3>
 Electronic device used for displaying ASCII text. It offers various display sizes. We are using 20x4. It is capable of operating i 8-bit mode, however 4-bit mode is more appropriate for mcu since only 6-7 pins are neede compared to 11pins with 8-bit. The 6 pin interface we are using consists of:
 
-![logic](../Images/lcd.PNG)
+![logic](../../Images/lcd.PNG)
 
 -RS  register select. Selects the data or instruction register inside the HD44780,
 	
@@ -36,7 +36,7 @@ Electronic device used for displaying ASCII text. It offers various display size
 
 <h3>Circuit diagram</h3>
 
-![logic](../Images/schemaprojekt.PNG)
+![logic](../../Images/schemaprojekt.PNG)
 <h2> Software description </h3>
 <p>SimulIDE: Simple real time electronic circuit simulator, with acces to atmega328p</p>
 <p>Atmel Studio: Integrated Development Environment (IDE) for developing and debugging AVR® and SAM microcontroller applications</p>
@@ -91,19 +91,19 @@ Electronic device used for displaying ASCII text. It offers various display size
 
 <h3> Flow chart</h3>
 
-![logic](../Images/flowchartfinal4.PNG)
+![logic](../../Images/flowchartfinal4.PNG)
 
 <h3> Simulation screenshots </h3>
 
-![logic](../Images/simul1.PNG)
+![logic](../../Images/simul1.PNG)
 
-![logic](../Images/simul2.PNG)
+![logic](../../Images/simul2.PNG)
 
-![logic](../Images/simul21.PNG)
+![logic](../../Images/simul21.PNG)
 
-![logic](../Images/simul3.PNG)
+![logic](../../Images/simul3.PNG)
 
-![logic](../Images/simul4.PNG)
+![logic](../../Images/simul4.PNG)
 <h3> Function documentation </h3>
 
 | **Function name** | **Function parameters** | **Description** |
