@@ -1,8 +1,10 @@
 <h1> Project DE-2 </h1>
 Authors:  
+
 Alexandr Voronin link to github repository: https://github.com/AlexandrVoronin/Digital-electronics-2/tree/master/project
 
 Richard Šebo
+
 <h2> Project objectives </h2>
 <p>Application of parking assistant using two HC-SR04 sensors. Output interface:LCD, frequency audio, led stripe</p>
 <h2> Hardware description </h3>
