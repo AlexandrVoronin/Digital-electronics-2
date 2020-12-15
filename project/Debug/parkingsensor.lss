@@ -707,7 +707,7 @@ void Update_warning(int sm_dist)
 
 0000042c <Uart_info>:
 
-//display info about obstacles in front/back/both
+//display info about obstacles in front/back/both (range 1m)
 void Uart_info(volatile float dist[])
 {
      42c:	cf 93       	push	r28

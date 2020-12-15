@@ -81,7 +81,7 @@ void Update_warning(int sm_dist)
 	}
 }
 
-//display info about obstacles in front/back/both
+//display info about obstacles in front/back/both (range 1m)
 void Uart_info(volatile float dist[])
 {
 	if (dist[0]<100 && dist[1]<100)
