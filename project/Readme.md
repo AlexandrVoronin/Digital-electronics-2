@@ -29,7 +29,7 @@ Electronic device used for displaying ASCII text. It offers various display size
 	
 -E  enable. Loads data into lcd on falling edge
 
--D7:4 Upper 4its in 4-bit mode.
+-D7:4 Upper 4its used in 4-bit mode.
 
 <h3> Scheme screen</h3>
 
