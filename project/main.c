@@ -23,14 +23,9 @@
 #include "project_functions.h"	//library for functions for displaying outputs
 #include "timer.h"				//library for timer
 
-
-volatile uint8_t trigger_enable = 1;	//enables sending trigger(10us) pulse to sensor
 volatile uint8_t sensor_id = 0;			//selects sensor for which the main loop executes
 volatile float distances[] = {0,0};		//distance[0]=distance to front sensor distance[1]=distance to back sensor
 char lcd_string[50];					//for displaying data on lcd
-
-
-
 
 int main(void)
 {
@@ -58,24 +53,19 @@ int main(void)
 	
     while (1) 
     {	
-		if (trigger_enable==1)
+		if (sensor_id == 1)
 		{
-		   if (sensor_id == 1)
-		   {
-			    _delay_ms(60);							//ensure one cycle lasts minimum 50us
-				GPIO_write_high(&PORTB,Back_trigger);	//
-				_delay_us(10);							//send start pulse (10us) to back sensor
-				GPIO_write_low(&PORTB,Back_trigger);	//
-				trigger_enable = 0;						//disable sending start pulse			   
-		   }
-		   else
-		   {
-				_delay_ms(60);							//ensure one cycle lasts minimum 50us			
-				GPIO_write_high(&PORTB,Front_trigger);	//
-				_delay_us(10);							//send start pulse (10us) to front sensor
-				GPIO_write_low(&PORTB,Front_trigger);	//
-				trigger_enable = 0;						//disable sending start pulse
-		   }
+			_delay_ms(60);							//ensure one cycle lasts minimum 50us
+			GPIO_write_high(&PORTB,Back_trigger);	//
+			_delay_us(10);							//send start pulse (10us) to back sensor
+			GPIO_write_low(&PORTB,Back_trigger);	//		   
+		}
+		else
+		{
+			_delay_ms(60);							//ensure one cycle lasts minimum 50us			
+			GPIO_write_high(&PORTB,Front_trigger);	//
+			_delay_us(10);							//send start pulse (10us) to front sensor
+			GPIO_write_low(&PORTB,Front_trigger);	//
 		}
 
 		int smaller_distance = 1;	//for saving the smaller distance of the 2 sensors
@@ -97,7 +87,7 @@ int main(void)
 						
 		Update_warning(smaller_distance);					//update warning message on lcd and led stripe based on smaller distance	
 	
-		distances[sensor_id]=distances[sensor_id]*(0.1509);	//convert to cm
+		distances[sensor_id]=distances[sensor_id]*(0.15085);	//convert to cm
 		
 		itoa(distances[sensor_id], lcd_string, 10);			// Convert decimal value to string
 		
@@ -124,7 +114,6 @@ ISR(INT1_vect)
 	{
 		distances[0]++;						//keep counting
 	} while (GPIO_read(&PIND,Front_Echo));	//until echo is 0
-	trigger_enable=1;						//enable trigger
 }
 
 //interrupt iterates as long as echo signal from back sensor is 1
@@ -134,7 +123,6 @@ ISR(INT0_vect)
 	{
 		distances[1]++;						//keep counting
 	} while (GPIO_read(&PIND,Back_Echo));	//until echo is 0
-	trigger_enable=1;						//enable trigger
 }
 
 ISR(TIMER2_OVF_vect)
