@@ -75,7 +75,6 @@ Electronic device used for displaying ASCII text. It offers various display size
 
 [lcd.c](lcd.c):
 - library lcd display control (see functions table)
-<h3> Flow chart</h3>
 
 [gpio.c](gpio.c):
 - gpio library for AVR-GCC (see functions table)
