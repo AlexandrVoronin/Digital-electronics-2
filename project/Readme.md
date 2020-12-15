@@ -1,7 +1,7 @@
 <h1> Project DE-2 </h1>
 Authors:  
 
-Alexandr Voronin link to github repository: https://github.com/AlexandrVoronin/Digital-electronics-2/tree/master/project
+Alexandr Voronin, link to github repository: https://github.com/AlexandrVoronin/Digital-electronics-2/tree/master/project
 
 Richard Šebo
 
