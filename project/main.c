@@ -57,8 +57,8 @@ int main(void)
 	sei(); //enable interrupts
 	
     while (1) 
-    {	
-		if (trigger_enable==1)
+    {		
+	if (trigger_enable==1)
 		{
 		   if (sensor_id == 1)
 		   {
