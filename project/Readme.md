@@ -143,4 +143,5 @@ Electronic device used for displaying ASCII text. It offers various display size
 
 1. https://rpishop.cz/senzory/815-ultrazvukovy-senzor-hc-sr04.html (Complete Guide for Ultrasonic Sensor HC-SR04)
 2. https://sites.google.com/site/qeewiki/books/avr-guide/external-interrupts-on-the-atmega328
+3. https://maxpromer.github.io/LCD-Character-Creator/
 
