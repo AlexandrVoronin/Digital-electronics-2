@@ -2,7 +2,7 @@
  * parkingsensor.c
  *
  * Created: 03.12.2020 13:33:19
- * Author : Vori
+ * Author : Alexandr Voronin, Richard Šebo
  */ 
 
 /* Includes ----------------------------------------------------------*/
@@ -15,36 +15,32 @@
 #include <stdlib.h>         // C library. Needed for conversion function
 #include <stdio.h>
 #include <util/delay.h>
-#include "uart.h"           // Peter Fleury's UART library
-#include "gpio.h"  
-#include "lcd.h"
-#include "lcd_definitions.h"   
-#include "project_setup.h"
-#include "project_functions.h"
-#include "timer.h"
+#include "uart.h"				// Peter Fleury's UART library
+#include "gpio.h"				//gpio library for AVR_GCC
+#include "lcd.h"				//functions for lcd operations
+#include "lcd_definitions.h"	//lcd pin definitions
+#include "project_setup.h"		//pins and declaration of led functions
+#include "project_functions.h"	//functions for displaying outputs
+#include "timer.h"				//needed for Timer2overflow
 
 
 volatile uint8_t trigger_enable = 1;	//enables sending trigger(10us) pulse to sensor
 volatile uint8_t sensor_id = 0;			//selects sensor for which the main loop executes
-volatile float distances[] = {0,0};
-char lcd_string[50];
-volatile int timer_count =0;
+volatile float distances[] = {0,0};		//distance[0]=distance to front sensor distance[1]=distance to bback sensor
+char lcd_string[50];					//for displaying data on lcd
+
 
 
 
 int main(void)
 {
-	//initial configuration of LCD display
-	lcd_config();
-
-	//initialize UART
-	uart_init(UART_BAUD_SELECT(9600,F_CPU));
-		
-	//initial configuration of pins
-	pins_config();	
+	lcd_config();	//initial configuration of LCD display
+	
+	uart_init(UART_BAUD_SELECT(9600,F_CPU));	//initialize UART		
+	
+	pins_config();	//initial configuration of pins
 						
-	//turn LEDs off
-	LEDs_off();						
+	LEDs_off();		//turn LEDs off				
 	
 	//enable overflow interrupt and set default value
 	TIM2_overflow_16ms();
@@ -62,13 +58,13 @@ int main(void)
 	
     while (1) 
     {
-		//set frequency signaling diode to loew
+		//set frequency signaling diode to low
 		GPIO_write_low(&PORTB, alarm);
 		if (trigger_enable==1)
 		{
 		   if (sensor_id == 1)
 		   {
-			    _delay_us(40);
+			    _delay_us(40);	//ensure one cycle lasts minimum 50us
 				//send start pulse (10us) to back sensor
 				GPIO_write_high(&PORTB,Back_trigger);
 				_delay_us(10);
@@ -77,16 +73,18 @@ int main(void)
 		   }
 		   else
 		   {
-			   _delay_us(40);
+				_delay_us(40);	//ensure one cycle lasts minimum 50us
+				//send start pulse (10us) to front sensor
 				GPIO_write_high(&PORTB,Front_trigger);
 				_delay_us(10);
 				GPIO_write_low(&PORTB,Front_trigger);
-				trigger_enable = 0;						//disable sending start pulse
+				trigger_enable = 0;					//disable sending start pulse
 		   }
 		}
 
 		int smaller_distance = 1;					//for saving the smaller distance of the 2 sensors
 		
+		//choose smaller distance
 		if(distances[0] > distances[1])
 		{
 			smaller_distance = distances[1];	
@@ -102,13 +100,13 @@ int main(void)
 		//update warning message based on smaller distance				
 		Update_warning(smaller_distance);					
 	
-		distances[sensor_id]=distances[sensor_id]*(0.151);	//convert to cm
+		distances[sensor_id]=distances[sensor_id]*(0.1509);	//convert to cm
 		
-		itoa(distances[sensor_id], lcd_string, 10);				// Convert decimal value to string
+		itoa(distances[sensor_id], lcd_string, 10);			// Convert decimal value to string
 		
-		Display_dist(sensor_id,distances,lcd_string);			//display distance on lcd
+		Display_dist(sensor_id,distances,lcd_string);		//display distance on lcd
 		
-		Uart_info(distances);									//interesting info to uart
+		Uart_info(distances);								//interesting info to uart
 		
 		//change sensor id for next loop
 		if (sensor_id==0)
@@ -119,9 +117,7 @@ int main(void)
 		{
 			sensor_id=0;
 		}		
-	}
-					
-    	
+	}	
 }
 
 //interrupt iterates as long as echo signal from front sensor is 1
@@ -142,47 +138,46 @@ ISR(INT0_vect){
 	trigger_enable=1;						//enable trigger
 }
 
-
 ISR(TIMER2_OVF_vect)
 {
 	int freq = 50;  //for saving closer distance
-	timer_count++;	//run every 5 led flicks
-	if (timer_count==5)
+	
+	//choose smaller distance
+	if(distances[0] >= distances[1])
 	{
-		//choose the smaller distance
-		if(distances[0] > distances[1])
-		{
-			freq = distances[1];
-		}
-		else
-		{
-			freq = distances[0];
-		}
-		if (freq<=100)
-		{
-			GPIO_toggle(&PORTB, alarm);
-		}
-		//select frequency of signal led based on smaller distance
-		if (freq <= 100 && freq > 75)
-		{
-			TIM2_overflow_16ms();												
-		}
-		else if (freq <= 75 && freq > 50)
-		{
-			TIM2_overflow_4ms();								
-		}
-		else if (freq <= 50 && freq > 25)
-		{
-			TIM2_overflow_2ms();								
-		}
-		else if (freq <= 25 && freq > 10)
-		{
-			TIM2_overflow_1ms();								
-		}
-		else if (freq <= 10)
-		{
-			TIM2_overflow_512us();									
-		}
-		timer_count=0;		
+		freq = distances[1];
 	}
+	else
+	{
+		freq = distances[0];
+	}
+	
+	//flick the led if in range for flicking
+	if (freq<=100)
+	{
+		GPIO_toggle(&PORTB, alarm);
+	}
+	
+	//select frequency of signal led based on smaller distance
+	if (freq <= 100 && freq > 75)
+	{
+		TIM2_overflow_16ms();
+	}
+	else if (freq <= 75 && freq > 50)
+	{
+		TIM2_overflow_4ms();
+	}
+	else if (freq <= 50 && freq > 25)
+	{
+		TIM2_overflow_2ms();
+	}
+	else if (freq <= 25 && freq > 10)
+	{
+		TIM2_overflow_1ms();
+	}
+	else if (freq <= 10)
+	{
+		TIM2_overflow_512us();
+	}
+
 }
