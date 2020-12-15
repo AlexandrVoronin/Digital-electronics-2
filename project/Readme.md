@@ -90,7 +90,7 @@ Electronic device used for displaying ASCII text. It offers various display size
 
 ![logic](../Images/flowchartfinal4.PNG)
 
-<h3> Simulation screenshot </h3>
+<h3> Simulation screenshots </h3>
 
 ![logic](../Images/simul1.PNG)
 
