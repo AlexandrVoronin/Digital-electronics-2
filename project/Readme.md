@@ -10,7 +10,7 @@ Authors: Alexandr Voronin, Richard Šebo
 <h3> LCD </h3>
 Electronic device used for displaying ASCII text. It offers various display sizes. We are using 20x4. It is capable of operating i 8-bit mode, however 4-bit mode is more appropriate for mcu since only 6-7 pins are neede compared to 11pins with 8-bit. The 6 pin interface we are using consists of:
 
-![logic](../Images/LCD.PNG)
+![logic](../Images/lcd.PNG)
 
 -RS  register select. Selects the data or instruction register inside the HD44780,
 	
