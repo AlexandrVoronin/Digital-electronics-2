@@ -64,10 +64,10 @@ Electronic device used for displaying ASCII text. It offers various display size
 - Timer overflow is changed depending on the distance, this changes the frequency of sound signalisation
 
 
-[project_setup.c]project_setup.c:
+[project_setup.c](project_setup.c):
 - Functions used for configuration of the pins and LCD display, functions for controling LEDs (see functions table)
 
-[project_functions.c]project_functions.c:
+[project_functions.c](project_functions.c):
 - Functions used for displaying and updating the distance, loading bar and warnings on LCD and UART information (see functions table)
 
 
