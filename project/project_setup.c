@@ -13,7 +13,6 @@ void pins_config(void)
 	GPIO_config_output(&DDRC,LED3);
 	GPIO_config_output(&DDRC,LED4);
 	GPIO_config_output(&DDRC,LED5);
-	GPIO_config_output(&DDRC,LED_BLINK); // ??????????
 	
 	//configure sound pin as output
 	GPIO_config_output(&DDRB, alarm); 
@@ -27,7 +26,6 @@ void pins_config(void)
 	GPIO_config_output(&DDRB, Back_trigger);
 	GPIO_write_low(&PORTB, Front_trigger);
 	GPIO_write_low(&PORTB, Back_trigger);
-	GPIO_write_low(&PORTB, LED_BLINK);
 		
 	//configure alarm as output and turn it off
 	GPIO_config_output(&DDRB, alarm);

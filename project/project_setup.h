@@ -10,7 +10,6 @@
 #define PROJECT_SETUP_H_
 
 //define pins
-#define LED_BLINK	PC0
 #define LED1		PC1
 #define LED2		PC2
 #define LED3		PC3

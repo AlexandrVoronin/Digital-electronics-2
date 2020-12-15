@@ -10,18 +10,18 @@
 #define F_CPU 16000000
 #endif
 
-#include <avr/io.h>         // AVR device-specific IO definitions
-#include <avr/interrupt.h>  // Interrupts standard C library for AVR-GCC
-#include <stdlib.h>         // C library. Needed for conversion function
+#include <avr/io.h>				// AVR device-specific IO definitions
+#include <avr/interrupt.h>		// Interrupts standard C library for AVR-GCC
+#include <stdlib.h>				// C library. Needed for conversion function
 #include <stdio.h>
 #include <util/delay.h>
 #include "uart.h"				// Peter Fleury's UART library
 #include "gpio.h"				//gpio library for AVR_GCC
-#include "lcd.h"				//functions for lcd operations
+#include "lcd.h"				//libbrary for functions for lcd operations
 #include "lcd_definitions.h"	//lcd pin definitions
-#include "project_setup.h"		//pins and declaration of led functions
-#include "project_functions.h"	//functions for displaying outputs
-#include "timer.h"				//needed for Timer2overflow
+#include "project_setup.h"		//pins definition and library for declaration of led functions
+#include "project_functions.h"	//library for functions for displaying outputs
+#include "timer.h"				//library for timer
 
 
 volatile uint8_t trigger_enable = 1;	//enables sending trigger(10us) pulse to sensor
@@ -58,31 +58,29 @@ int main(void)
 	
     while (1) 
     {
-		//set frequency signaling diode to low
-		GPIO_write_low(&PORTB, alarm);
+		
+		
 		if (trigger_enable==1)
 		{
 		   if (sensor_id == 1)
 		   {
-			    _delay_us(40);	//ensure one cycle lasts minimum 50us
-				//send start pulse (10us) to back sensor
-				GPIO_write_high(&PORTB,Back_trigger);
-				_delay_us(10);
-				GPIO_write_low(&PORTB,Back_trigger);
+			    _delay_us(40);							//ensure one cycle lasts minimum 50us
+				GPIO_write_high(&PORTB,Back_trigger);	//
+				_delay_us(10);							//send start pulse (10us) to back sensor
+				GPIO_write_low(&PORTB,Back_trigger);	//
 				trigger_enable = 0;						//disable sending start pulse			   
 		   }
 		   else
 		   {
-				_delay_us(40);	//ensure one cycle lasts minimum 50us
-				//send start pulse (10us) to front sensor
-				GPIO_write_high(&PORTB,Front_trigger);
-				_delay_us(10);
-				GPIO_write_low(&PORTB,Front_trigger);
-				trigger_enable = 0;					//disable sending start pulse
+				_delay_us(40);							//ensure one cycle lasts minimum 50us			
+				GPIO_write_high(&PORTB,Front_trigger);	//
+				_delay_us(10);							//send start pulse (10us) to front sensor
+				GPIO_write_low(&PORTB,Front_trigger);	//
+				trigger_enable = 0;						//disable sending start pulse
 		   }
 		}
 
-		int smaller_distance = 1;					//for saving the smaller distance of the 2 sensors
+		int smaller_distance = 1;	//for saving the smaller distance of the 2 sensors
 		
 		//choose smaller distance
 		if(distances[0] > distances[1])
@@ -94,11 +92,12 @@ int main(void)
 			smaller_distance = distances[0];	
 		}
 		
-		//update load bar based on smaller distance
-		Load_bar(smaller_distance);	
 		
-		//update warning message based on smaller distance				
-		Update_warning(smaller_distance);					
+		Load_bar(smaller_distance);							//update load bar based on smaller distance
+		
+		GPIO_write_low(&PORTB, alarm);						//set frequency signaling diode to low
+						
+		Update_warning(smaller_distance);					//update warning message on lcd and led stripe based on smaller distance	
 	
 		distances[sensor_id]=distances[sensor_id]*(0.1509);	//convert to cm
 		

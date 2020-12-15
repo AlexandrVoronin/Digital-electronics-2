@@ -4,12 +4,11 @@
  * Created: 14.12.2020 9:59:42
  *  Author: Vori
  */ 
-#include "gpio.h"
-#include "project_setup.h"
-#include "lcd.h"
-#include "project_functions.h"
-#include "uart.h"
-
+#include "gpio.h"				//gpio library for AVR_GCC
+#include "project_setup.h"		//pins definition and library for led functions
+#include "lcd.h"				//library of functions for lcd operations
+#include "project_functions.h"	//library of functions for displaying outputs
+#include "uart.h"				//Peter Fleury's UART library
 //display distances to sensor[id]
 void Display_dist(uint8_t id,volatile float dist[], char string[])
 {
@@ -70,17 +69,21 @@ void Update_warning(int sm_dist)
 		lcd_gotoxy(22, 2);
 		lcd_puts("   !!STOP!!      ");
 	}
-	else if (sm_dist <= 10 )
+	else if (sm_dist <= 10 && sm_dist > 2 )
 	{
 		lcd_gotoxy(22, 2); 
 		lcd_puts("   !!STOP!!      ");
-	}	
-	
-
+	}
+	else if (sm_dist <= 2)
+	{
+		lcd_gotoxy(22, 2);
+		lcd_puts("     <2cm        ");	
+	}
 }
 
 //display info about obstacles in front/back/both
-void Uart_info(volatile float dist[]){
+void Uart_info(volatile float dist[])
+{
 	if (dist[0]<100 && dist[1]<100)
 	{
 		uart_puts("Obstacles in front and back!\n");
@@ -98,26 +101,14 @@ void Uart_info(volatile float dist[]){
 		uart_puts("No obstacle nearby!\n");
 	}
 }
+
 //displays bar on lcd based on the smaller distance
-void Load_bar(int distance){
-	if (distance>=500)
+void Load_bar(int distance)
+{
+	if (distance>480)
 	{
 		lcd_gotoxy(20,0);
-		lcd_puts("                    ");
-	}
-	else if (distance<=500 && distance>490)
-	{
-		lcd_gotoxy(20,0);
-		lcd_putc(1);
-		lcd_gotoxy(21,0);
-		lcd_puts("                    ");
-	}
-	else if (distance<=490 && distance>480)
-	{
-		lcd_gotoxy(20,0);
-		lcd_putc(2);
-		lcd_gotoxy(21,0);
-		lcd_puts("                    ");
+		lcd_puts("                     ");
 	}
 	else if (distance<=480 && distance>470)
 	{
