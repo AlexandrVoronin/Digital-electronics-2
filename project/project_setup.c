@@ -2,7 +2,7 @@
  * project_setup.c
  *
  * Created: 12/11/2020 1:25:48 AM
- *  Author: Alexandr Voronin, Richard Šebo
+ *  Author: Alexandr Voronin, Richard Å ebo
  */ 
 
 #include "gpio.h"
@@ -69,8 +69,7 @@ void lcd_config(void)
 	lcd_command(1 << LCD_CGRAM);
 	for (uint8_t i = 0; i < 48; i++)
 	{
-		// Store all new chars to memory line by line
-		lcd_data(customChar[i]);
+		lcd_data(customChar[i]);	// Store all new chars to memory line by line
 	}
 	
 	// Set DDRAM address
