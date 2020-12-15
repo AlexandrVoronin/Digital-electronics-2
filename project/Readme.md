@@ -92,6 +92,15 @@ Electronic device used for displaying ASCII text. It offers various display size
 
 <h3> Simulation screenshot </h3>
 
+![logic](../Images/simul1.PNG)
+
+![logic](../Images/simul2.PNG)
+
+![logic](../Images/simul21.PNG)
+
+![logic](../Images/simul3.PNG)
+
+![logic](../Images/simul4.PNG)
 <h3> Function documentation </h3>
 
 | **Function name** | **Function parameters** | **Description** |
