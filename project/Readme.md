@@ -48,6 +48,12 @@ Electronic device used for displaying ASCII text. It offers various display size
 [main.c](main.c) consists of:
 1. Import of libraries
 2. Global variables initialization
+
+- `volatile uint8_t sensor_id = 0;`	- Select sensor for which the main loop executes
+
+- `volatile float distances[] = {0,0};`	- distances[0] = distance to front sensor; distances [1] = distance to back sensor
+
+- `char lcd_string[50];`			- For displaying data on lcd
 3. Main function body:
 
 
