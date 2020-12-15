@@ -30,7 +30,7 @@ Electronic device used for displaying ASCII text. It offers various display size
 	- RS=0, when a command is given
 	- RS=1, when data is sent
 	
--E  enable. Loads data into lcd on falling edge
+-En  enable. Loads data into lcd on falling edge
 
 -D7:4 Upper 4its used in 4-bit mode.
 
