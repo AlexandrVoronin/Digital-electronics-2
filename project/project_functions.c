@@ -2,13 +2,13 @@
  * project_functions.c
  *
  * Created: 14.12.2020 9:59:42
- *  Author: Alexandr Voronin, Richard Šebo
+ *  Author: Alexandr Voronin, Richard Å ebo
  */ 
 
 #include "gpio.h"				//gpio library for AVR_GCC
-#include "project_setup.h"		//pins definition and library for led functions
+#include "project_setup.h"			//pins definition and library for led functions
 #include "lcd.h"				//library of functions for lcd operations
-#include "project_functions.h"	//library of functions for displaying outputs
+#include "project_functions.h"			//library of functions for displaying outputs
 #include "uart.h"				//Peter Fleury's UART library
 
 //display distances to sensor[id]
