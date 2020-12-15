@@ -28,6 +28,7 @@ volatile uint8_t trigger_enable = 1;	//enables sending trigger(10us) pulse to se
 volatile uint8_t sensor_id = 0;			//selects sensor for which the main loop executes
 volatile float distances[] = {0,0};
 char lcd_string[50];
+volatile int timer_count =0;
 
 
 
@@ -67,7 +68,7 @@ int main(void)
 		{
 		   if (sensor_id == 1)
 		   {
-			    _delay_us(50);
+			    _delay_us(40);
 				//send start pulse (10us) to back sensor
 				GPIO_write_high(&PORTB,Back_trigger);
 				_delay_us(10);
@@ -76,7 +77,7 @@ int main(void)
 		   }
 		   else
 		   {
-			   _delay_us(50);
+			   _delay_us(40);
 				GPIO_write_high(&PORTB,Front_trigger);
 				_delay_us(10);
 				GPIO_write_low(&PORTB,Front_trigger);
@@ -101,7 +102,7 @@ int main(void)
 		//update warning message based on smaller distance				
 		Update_warning(smaller_distance);					
 	
-		distances[sensor_id]=distances[sensor_id]*(0.15009);	//convert to cm
+		distances[sensor_id]=distances[sensor_id]*(0.151);	//convert to cm
 		
 		itoa(distances[sensor_id], lcd_string, 10);				// Convert decimal value to string
 		
@@ -145,41 +146,43 @@ ISR(INT0_vect){
 ISR(TIMER2_OVF_vect)
 {
 	int freq = 50;  //for saving closer distance
-	
-	//choose the smaller distance
-	if(distances[0] > distances[1])
+	timer_count++;	//run every 5 led flicks
+	if (timer_count==5)
 	{
-		freq = distances[1];
-	}
-	else
-	{
-		freq = distances[0];
-	}
-	
-	//select frequency of signal led based on smaller distance
-	if (freq <= 50 && freq > 40)
-	{
-		TIM2_overflow_16ms();				
-		GPIO_toggle(&PORTB, alarm);								
-	}
-	else if (freq <= 40 && freq > 30)
-	{
-		TIM2_overflow_4ms();					
-		GPIO_toggle(&PORTB, alarm);				
-	}
-	else if (freq <= 30 && freq > 20)
-	{
-		TIM2_overflow_2ms();					
-		GPIO_toggle(&PORTB, alarm);				
-	}
-	else if (freq <= 20 && freq > 10)
-	{
-		TIM2_overflow_1ms();					
-		GPIO_toggle(&PORTB, alarm);				
-	}
-	else if (freq <= 10)
-	{
-		TIM2_overflow_512us();					
-		GPIO_toggle(&PORTB, alarm);				
+		//choose the smaller distance
+		if(distances[0] > distances[1])
+		{
+			freq = distances[1];
+		}
+		else
+		{
+			freq = distances[0];
+		}
+		if (freq<=100)
+		{
+			GPIO_toggle(&PORTB, alarm);
+		}
+		//select frequency of signal led based on smaller distance
+		if (freq <= 100 && freq > 75)
+		{
+			TIM2_overflow_16ms();												
+		}
+		else if (freq <= 75 && freq > 50)
+		{
+			TIM2_overflow_4ms();								
+		}
+		else if (freq <= 50 && freq > 25)
+		{
+			TIM2_overflow_2ms();								
+		}
+		else if (freq <= 25 && freq > 10)
+		{
+			TIM2_overflow_1ms();								
+		}
+		else if (freq <= 10)
+		{
+			TIM2_overflow_512us();									
+		}
+		timer_count=0;		
 	}
 }
