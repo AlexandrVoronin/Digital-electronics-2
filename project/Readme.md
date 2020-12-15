@@ -34,7 +34,7 @@ Electronic device used for displaying ASCII text. It offers various display size
 
 -D7:4 Upper 4its used in 4-bit mode.
 
-<h3> Scheme screen</h3>
+<h3>Circuit diagram</h3>
 
 ![logic](../Images/schemaprojekt.PNG)
 <h2> Software description </h3>
