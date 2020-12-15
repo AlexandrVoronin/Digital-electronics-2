@@ -112,7 +112,7 @@ ISR(INT1_vect)
 {
 	do
 	{
-		distances[0]++;						//keep counting
+		distances[0]++;			//keep counting
 	} while (GPIO_read(&PIND,Front_Echo));	//until echo is 0
 }
 
@@ -121,7 +121,7 @@ ISR(INT0_vect)
 {
 	do
 	{
-		distances[1]++;						//keep counting
+		distances[1]++;			//keep counting
 	} while (GPIO_read(&PIND,Back_Echo));	//until echo is 0
 }
 
