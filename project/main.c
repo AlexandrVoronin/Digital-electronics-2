@@ -57,14 +57,12 @@ int main(void)
 	sei(); //enable interrupts
 	
     while (1) 
-    {
-		
-		
+    {	
 		if (trigger_enable==1)
 		{
 		   if (sensor_id == 1)
 		   {
-			    _delay_us(40);							//ensure one cycle lasts minimum 50us
+			    _delay_ms(60);							//ensure one cycle lasts minimum 50us
 				GPIO_write_high(&PORTB,Back_trigger);	//
 				_delay_us(10);							//send start pulse (10us) to back sensor
 				GPIO_write_low(&PORTB,Back_trigger);	//
@@ -72,7 +70,7 @@ int main(void)
 		   }
 		   else
 		   {
-				_delay_us(40);							//ensure one cycle lasts minimum 50us			
+				_delay_ms(60);							//ensure one cycle lasts minimum 50us			
 				GPIO_write_high(&PORTB,Front_trigger);	//
 				_delay_us(10);							//send start pulse (10us) to front sensor
 				GPIO_write_low(&PORTB,Front_trigger);	//
