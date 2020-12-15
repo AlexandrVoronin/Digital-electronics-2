@@ -3,7 +3,7 @@ Authors:
 
 Alexandr Voronin, link to github repository: https://github.com/AlexandrVoronin/Digital-electronics-2/tree/master/project
 
-Richard Šebo, link to github repository: https://github.com/richar-d/Digital-electronics-2/tree/master/Labs
+Richard Šebo, link to github repository: https://github.com/richar-d/Digital-electronics-2/tree/master/project
 
 
 
@@ -14,7 +14,7 @@ Richard Šebo, link to github repository: https://github.com/richar-d/Digital-el
 <h2> Hardware description </h3>
 
 <h3> HC-SR04 </h3>
-<p>HC-SR04 is a distance measuring sensor with range from 2cm to 4m. It has 4 pins:Vcc,Gnd, trigger, echo. To start its function it must first recieve pulse of at least 10us to the trigger pin. Sensor then transmits a sonic burst of eight pulses at 40 KHz. This pattern makes the signal unique, which allows it to differentiate between emited signal and ambient ultrasonic noise. The echo pin is set high and if the pulses are not reflected back it times out after 38ms  and is set to low (no obstacle in range). If the pulses are reflected, echo is set to low when the signal is recieved producing pulse with width between 150 µS to 25 mS based on how long it took the signal to come back. Based on that and knowing the speed of light we can calculate the distance between the sensor and object that reflected the original pulses. In our program we let the MCU itterate as fast as it can as long as echo is HIGH, and then convert to distance by multiplying the result with precalculated constant</p>
+<p>HC-SR04 is a distance measuring sensor with range from 2cm to 4m. It has 4 pins: Vcc, Gnd, trigger, echo. To start its function it must first recieve pulse of at least 10us to the trigger pin. Sensor then transmits a sonic burst of eight pulses at 40 KHz. This pattern makes the signal unique, which allows it to differentiate between emitted signal and ambient noise. The echo pin is set to high and if the pulses are not reflected back it times out after 38ms  and is set to low (no obstacle in range). If the pulses are reflected, echo is set to low when the signal is received producing pulse with width between 150 µS to 25 mS based on how long it took the signal to come back. Based on that and knowing the speed of sound we can calculate the distance between the sensor and object that reflected the original pulses. In our program we let the MCU itterate as fast as it can as long as echo is HIGH, and then convert to distance by multiplying the result with precalculated constant</p>
 
 ![logic](../Images/hcsr042.PNG)
 

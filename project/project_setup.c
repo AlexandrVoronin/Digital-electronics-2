@@ -1,3 +1,10 @@
+/*
+ * project_setup.c
+ *
+ * Created: 12/11/2020 1:25:48 AM
+ *  Author: Alexandr Voronin, Richard Šebo
+ */ 
+
 #include "gpio.h"
 #include "project_setup.h"
 #include "lcd.h"

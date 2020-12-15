@@ -1,8 +1,8 @@
 /*
- * LED_setup.h
+ * project_setup.h
  *
  * Created: 12/11/2020 1:40:54 AM
- *  Author: Richard
+ *  Author: Alexandr Voronin, Richard Šebo
  */ 
 
 

@@ -1,5 +1,5 @@
 /*
- * parkingsensor.c
+ * main.c
  *
  * Created: 03.12.2020 13:33:19
  * Author : Alexandr Voronin, Richard Šebo

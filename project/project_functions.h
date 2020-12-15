@@ -2,7 +2,7 @@
  * project_functions.h
  *
  * Created: 14.12.2020 9:58:46
- *  Author: Vori
+ *  Author: Alexandr Voronin, Richard Šebo
  */ 
 
 
