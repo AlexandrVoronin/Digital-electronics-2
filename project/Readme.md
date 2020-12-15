@@ -71,10 +71,15 @@ Electronic device used for displaying ASCII text. It offers various display size
 - Functions used for displaying and updating the distance, loading bar and warnings on LCD and UART information (see functions table)
 
 [uart.c](uart.c):
-- commands for uart protocol (see functions table)
+- library for uart protocol (see functions table)
+
+[lcd.c](lcd.c):
+- library lcd display control (see functions table)
+<h3> Flow chart</h3>
 
 [gpio.c](gpio.c):
 - gpio library for AVR-GCC (see functions table)
+
 <h3> Flow chart</h3>
 
 ![logic](../Images/flowchartfinal4.PNG)
