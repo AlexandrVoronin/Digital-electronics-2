@@ -73,6 +73,8 @@ Electronic device used for displaying ASCII text. It offers various display size
 [uart.c](uart.c):
 - commands for uart protocol (see functions table)
 
+[gpio.c](gpio.c):
+- gpio library for AVR-GCC (see functions table)
 <h3> Flow chart</h3>
 
 ![logic](../Images/flowchartfinal4.PNG)
