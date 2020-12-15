@@ -10,22 +10,22 @@
 #define F_CPU 16000000
 #endif
 
-#include <avr/io.h>				// AVR device-specific IO definitions
+#include <avr/io.h>			// AVR device-specific IO definitions
 #include <avr/interrupt.h>		// Interrupts standard C library for AVR-GCC
-#include <stdlib.h>				// C library. Needed for conversion function
+#include <stdlib.h>			// C library. Needed for conversion function
 #include <stdio.h>
 #include <util/delay.h>
-#include "uart.h"				//Peter Fleury's UART library
-#include "gpio.h"				//gpio library for AVR_GCC
-#include "lcd.h"				//library for functions for lcd operations
-#include "lcd_definitions.h"	//lcd pin definitions
+#include "uart.h"			//Peter Fleury's UART library
+#include "gpio.h"			//gpio library for AVR_GCC
+#include "lcd.h"			//library for functions for lcd operations
+#include "lcd_definitions.h"		//lcd pin definitions
 #include "project_setup.h"		//pins definition and library for declaration of led functions
-#include "project_functions.h"	//library for functions for displaying outputs
-#include "timer.h"				//library for timer
+#include "project_functions.h"		//library for functions for displaying outputs
+#include "timer.h"			//library for timer
 
-volatile uint8_t sensor_id = 0;			//selects sensor for which the main loop executes
-volatile float distances[] = {0,0};		//distance[0]=distance to front sensor distance[1]=distance to back sensor
-char lcd_string[50];					//for displaying data on lcd
+volatile uint8_t sensor_id = 0;		//selects sensor for which the main loop executes
+volatile float distances[] = {0,0};	//distance[0]=distance to front sensor distance[1]=distance to back sensor
+char lcd_string[50];			//for displaying data on lcd
 
 int main(void)
 {
@@ -55,14 +55,14 @@ int main(void)
     	{	
 		if (sensor_id == 1)
 		{
-			_delay_ms(60);							//ensure one cycle lasts minimum 50us
+			_delay_ms(60);							//ensure one cycle lasts at least 60 ms
 			GPIO_write_high(&PORTB,Back_trigger);	//
 			_delay_us(10);							//send start pulse (10us) to back sensor
 			GPIO_write_low(&PORTB,Back_trigger);	//		   
 		}
 		else
 		{
-			_delay_ms(60);							//ensure one cycle lasts minimum 50us			
+			_delay_ms(60);							//ensure one cycle lasts at least 60 ms			
 			GPIO_write_high(&PORTB,Front_trigger);	//
 			_delay_us(10);							//send start pulse (10us) to front sensor
 			GPIO_write_low(&PORTB,Front_trigger);	//
@@ -81,19 +81,19 @@ int main(void)
 		}
 		
 		
-		Load_bar(smaller_distance);							//update load bar based on smaller distance
+		Load_bar(smaller_distance);				//update load bar based on smaller distance
 		
-		GPIO_write_low(&PORTB, alarm);						//set frequency signaling diode to low
+		GPIO_write_low(&PORTB, alarm);				//set frequency signaling diode to low
 						
-		Update_warning(smaller_distance);					//update warning message on lcd and led stripe based on smaller distance	
+		Update_warning(smaller_distance);			//update warning message on lcd and led stripe based on smaller distance	
 	
 		distances[sensor_id]=distances[sensor_id]*(0.15085);	//convert to cm
 		
-		itoa(distances[sensor_id], lcd_string, 10);			// Convert decimal value to string
+		itoa(distances[sensor_id], lcd_string, 10);		// Convert decimal value to string
 		
 		Display_dist(sensor_id,distances,lcd_string);		//display distance on lcd
 		
-		Uart_info(distances);								//interesting info to uart
+		Uart_info(distances);					//interesting info to uart
 		
 		//change sensor id for next loop
 		if (sensor_id==0)
