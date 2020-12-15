@@ -134,3 +134,10 @@ Electronic device used for displaying ASCII text. It offers various display size
 | `GPIO_write_high` | `volatile uint8_t *reg_name, uint8_t pin_num` | Set one output pin in PORT register to high |
 | `GPIO_toggle` | `volatile uint8_t *reg_name, uint8_t pin_num` | Toggle one output pin value in PORT register |
 | `GPIO_read` | `volatile uint8_t *reg_name, uint8_t pin_num` | Get input pin value from PIN register, returns `uint8_t
+
+
+## References
+
+1. https://rpishop.cz/senzory/815-ultrazvukovy-senzor-hc-sr04.html (Complete Guide for Ultrasonic Sensor HC-SR04)
+2. https://sites.google.com/site/qeewiki/books/avr-guide/external-interrupts-on-the-atmega328
+
