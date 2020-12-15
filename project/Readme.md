@@ -5,18 +5,9 @@ Alexandr Voronin, link to github repository: https://github.com/AlexandrVoronin/
 
 Richard Šebo, link to github repository: https://github.com/richar-d/Digital-electronics-2/tree/master/Labs
 
-## Contents
 
-1. [Project objectives](#Project objectives)
-2. [Hardware description](#hardware description)
-3. [Software](#software)
-5. [Vývojový diagram](#Vývojový_diagram)
-4. [Popis kódu a simulace](#Popis_kódu_a_simulace)
-5. [Dokumentace](#Dokumentace)
-5. [Video](#Video)
-6. [References](#References)
 
-#Project objectives
+<h3>Project objectives<h3>
 <p>Application of parking assistant using two HC-SR04 sensors. Output interface:LCD, frequency "audio", led stripe</p>
 
 <h2> Hardware description </h3>
