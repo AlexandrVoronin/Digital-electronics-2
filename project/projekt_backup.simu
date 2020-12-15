@@ -57,20 +57,11 @@ Resistor-6:
 Ground-5: 
 <item id="Ground-182" labely="8" valLabely="0" hflip="1" x="184" y="-200" objectName="Ground-5" valLabRot="0" Show_id="false" vflip="1" itemtype="Ground" rotation="0" valLabelx="0" labelx="-16" labelrot="0"/>
  
-Frequencimeter-4: 
-<item id="Frequencimeter-96" labely="-24" valLabely="0" hflip="1" x="60" y="-192" objectName="Frequencimeter-4" valLabRot="0" Show_id="false" vflip="1" itemtype="Frequencimeter" rotation="0" valLabelx="0" labelx="-32" labelrot="0"/>
- 
-Node-3: 
-<item id="Node-98" labely="-24" valLabely="0" hflip="1" x="16" y="-268" objectName="Node-3" valLabRot="0" Show_id="false" vflip="1" itemtype="Node" rotation="0" valLabelx="0" labelx="-16" labelrot="0"/>
- 
 TextComponent-2: 
 <item Show_id="false" labely="-24" x="-424" Opacity="1" labelrot="0" vflip="1" y="-696" valLabelx="0" Text="FRONT SENSOR" id="TextComponent-100" itemtype="TextComponent" valLabely="0" Border="1" Fixed_Width="true" hflip="1" Font_Size="10" Font="Helvetica [Cronyx]" rotation="0" Margin="5" labelx="-16" valLabRot="0" objectName="TextComponent-2"/>
  
 TextComponent-1: 
 <item Show_id="false" labely="-24" x="-256" Opacity="1" labelrot="0" vflip="1" y="-836" valLabelx="0" Text="BACK SENSOR" id="TextComponent-101" itemtype="TextComponent" valLabely="0" Border="1" Fixed_Width="true" hflip="1" Font_Size="10" Font="Helvetica [Cronyx]" rotation="0" Margin="5" labelx="-16" valLabRot="0" objectName="TextComponent-1"/>
- 
-SerialTerm-104: 
-<item Show_id="false" labely="-24" x="-196" posx="1187" sizey="200" labelrot="0" vflip="1" y="-356" valLabelx="0" id="SerialTerm-104" itemtype="SerialTerm" valLabely="0" Mcu_Uart="1" hflip="1" sizex="412" rotation="0" posy="124" labelx="-16" valLabRot="0" objectName="SerialTerm-104"/>
  
 Connector-23: 
 <item Show_id="false" labely="-24" x="-204" labelrot="0" vflip="1" y="-268" startpinid="atmega328-11-PD5" valLabelx="0" pointList="-204,-268,-428,-268,-428,-392" enodeid="Circ_eNode-24" id="Connector-4" itemtype="Connector" valLabely="0" hflip="1" rotation="0" endpinid="Hd44780-12-dataPin5" labelx="-16" valLabRot="0" objectName="Connector-23"/>
@@ -153,15 +144,6 @@ Connector-79:
 Connector-81: 
 <item Show_id="false" labely="-24" x="60" labelrot="0" vflip="1" y="-268" startpinid="Resistor-6-rPin" valLabelx="0" pointList="60,-268,68,-268" enodeid="Circ_eNode-82" id="Connector-93" itemtype="Connector" valLabely="0" hflip="1" rotation="0" endpinid="LedBar-22-led0-pinP" labelx="-16" valLabRot="0" objectName="Connector-81"/>
  
-Connector-85: 
-<item Show_id="false" labely="-24" x="-156" labelrot="0" vflip="1" y="-268" startpinid="atmega328-11-PB4" valLabelx="0" pointList="-156,-268,16,-268" enodeid="Circ_eNode-86" id="Connector-85" itemtype="Connector" valLabely="0" hflip="1" rotation="0" endpinid="Node-3-0" labelx="-16" valLabRot="0" objectName="Connector-85"/>
- 
-Connector-87: 
-<item Show_id="false" labely="-24" x="20" labelrot="0" vflip="1" y="-192" startpinid="Frequencimeter-4-lPin" valLabelx="0" pointList="20,-192,20,-268,16,-268" enodeid="Circ_eNode-86" id="Connector-97" itemtype="Connector" valLabely="0" hflip="1" rotation="0" endpinid="Node-3-1" labelx="-16" valLabRot="0" objectName="Connector-87"/>
- 
-Connector-88: 
-<item Show_id="false" labely="-24" x="16" labelrot="0" vflip="1" y="-268" startpinid="Node-3-2" valLabelx="0" pointList="16,-268,28,-268" enodeid="Circ_eNode-86" id="Connector-99" itemtype="Connector" valLabely="0" hflip="1" rotation="0" endpinid="Resistor-6-lPin" labelx="-16" valLabRot="0" objectName="Connector-88"/>
- 
 Connector-64: 
 <item Show_id="false" labely="-24" x="184" labelrot="0" vflip="1" y="-316" startpinid="Node-20-1" valLabelx="0" pointList="184,-316,184,-300,188,-300" enodeid="enode-64" id="Connector-64" itemtype="Connector" valLabely="0" hflip="1" rotation="0" endpinid="Ground-19-Gnd" labelx="-16" valLabRot="0" objectName="Connector-64"/>
  
@@ -182,6 +164,9 @@ Connector-83:
  
 Connector-103: 
 <item Show_id="false" labely="-24" x="-156" labelrot="0" vflip="1" y="-252" startpinid="atmega328-11-PB2" valLabelx="0" pointList="-156,-252,-104,-252,-104,-696,-260,-696,-260,-720" enodeid="enode-103" id="Connector-103" itemtype="Connector" valLabely="0" hflip="1" rotation="0" endpinid="SR04-14-trigpin" labelx="-16" valLabRot="0" objectName="Connector-103"/>
+ 
+Connector-85: 
+<item Show_id="false" labely="-24" x="-156" labelrot="0" vflip="1" y="-268" startpinid="atmega328-11-PB4" valLabelx="0" pointList="-156,-268,28,-268" enodeid="enode-85" id="Connector-85" itemtype="Connector" valLabely="0" hflip="1" rotation="0" endpinid="Resistor-6-lPin" labelx="-16" valLabRot="0" objectName="Connector-85"/>
  
 PlotterWidget-93: 
 <item mouseTracking="false" palette="" pos="" focusPolicy="0" baseSize="" windowTitle="" acceptDrops="false" windowModified="false" accessibleName="" MinVolt="-500" contextMenuPolicy="1" minimumSizeHint="" windowIconText="" toolTipDuration="-1" normalGeometry="" x="0" toolTip="" maximumWidth="1000" windowIcon="" minimumSize="" rect="" sizeHint="" autoFillBackground="false" geometry="" size="" minimumHeight="200" childrenRegion="" sizeIncrement="" maximumSize="" frameGeometry="" styleSheet="" maximized="false" MaxVolt="500" sizePolicy="" windowOpacity="1" locale="" focus="false" whatsThis="" minimized="false" modal="false" accessibleDescription="" isActiveWindow="true" width="200" objectName="PlotterWidget-93" Tracks="1" font="MS Shell Dlg 2,8.25,-1,5,50,0,0,0,0,0" minimumWidth="200" cursor="" windowModality="0" enabled="true" statusTip="" updatesEnabled="true" frameSize="" fullScreen="false" itemtype="Plotter" Scale="1" maximumHeight="200" windowFilePath="" height="200" layoutDirection="0" visible="false" inputMethodHints="0" childrenRect="" y="0"/>

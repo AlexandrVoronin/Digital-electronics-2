@@ -15,9 +15,9 @@
 #include <stdlib.h>				// C library. Needed for conversion function
 #include <stdio.h>
 #include <util/delay.h>
-#include "uart.h"				// Peter Fleury's UART library
+#include "uart.h"				//Peter Fleury's UART library
 #include "gpio.h"				//gpio library for AVR_GCC
-#include "lcd.h"				//libbrary for functions for lcd operations
+#include "lcd.h"				//library for functions for lcd operations
 #include "lcd_definitions.h"	//lcd pin definitions
 #include "project_setup.h"		//pins definition and library for declaration of led functions
 #include "project_functions.h"	//library for functions for displaying outputs
@@ -26,7 +26,7 @@
 
 volatile uint8_t trigger_enable = 1;	//enables sending trigger(10us) pulse to sensor
 volatile uint8_t sensor_id = 0;			//selects sensor for which the main loop executes
-volatile float distances[] = {0,0};		//distance[0]=distance to front sensor distance[1]=distance to bback sensor
+volatile float distances[] = {0,0};		//distance[0]=distance to front sensor distance[1]=distance to back sensor
 char lcd_string[50];					//for displaying data on lcd
 
 
@@ -118,7 +118,8 @@ int main(void)
 }
 
 //interrupt iterates as long as echo signal from front sensor is 1
-ISR(INT1_vect){
+ISR(INT1_vect)
+{
 	do
 	{
 		distances[0]++;						//keep counting
@@ -127,7 +128,8 @@ ISR(INT1_vect){
 }
 
 //interrupt iterates as long as echo signal from back sensor is 1
-ISR(INT0_vect){
+ISR(INT0_vect)
+{
 	do
 	{
 		distances[1]++;						//keep counting
@@ -139,6 +141,12 @@ ISR(TIMER2_OVF_vect)
 {
 	int freq = 50;  //for saving closer distance
 	
+	//flick the led if in range for flicking
+	if (freq<=100)
+	{
+		GPIO_toggle(&PORTB, alarm);
+	}	
+	
 	//choose smaller distance
 	if(distances[0] >= distances[1])
 	{
@@ -149,32 +157,26 @@ ISR(TIMER2_OVF_vect)
 		freq = distances[0];
 	}
 	
-	//flick the led if in range for flicking
-	if (freq<=100)
-	{
-		GPIO_toggle(&PORTB, alarm);
-	}
-	
 	//select frequency of signal led based on smaller distance
 	if (freq <= 100 && freq > 75)
 	{
-		TIM2_overflow_16ms();
+		TIM2_overflow_16ms();		//f = 30.5 Hz	
 	}
 	else if (freq <= 75 && freq > 50)
 	{
-		TIM2_overflow_4ms();
+		TIM2_overflow_4ms();		//f = 125 Hz
 	}
 	else if (freq <= 50 && freq > 25)
 	{
-		TIM2_overflow_2ms();
+		TIM2_overflow_2ms();		//f = 250 Hz
 	}
 	else if (freq <= 25 && freq > 10)
 	{
-		TIM2_overflow_1ms();
+		TIM2_overflow_1ms();		//f = 500 Hz
 	}
 	else if (freq <= 10)
 	{
-		TIM2_overflow_512us();
+		TIM2_overflow_512us();		//f = 1 kHz
 	}
 
 }

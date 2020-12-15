@@ -5,9 +5,9 @@
  *  Author: Vori
  */ 
 #include "gpio.h"				//gpio library for AVR_GCC
-#include "project_setup.h"			//pins definition and library for led functions
+#include "project_setup.h"		//pins definition and library for led functions
 #include "lcd.h"				//library of functions for lcd operations
-#include "project_functions.h"			//library of functions for displaying outputs
+#include "project_functions.h"	//library of functions for displaying outputs
 #include "uart.h"				//Peter Fleury's UART library
 //display distances to sensor[id]
 void Display_dist(uint8_t id,volatile float dist[], char string[])

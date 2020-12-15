@@ -23,11 +23,11 @@
 #define Back_Echo	  PD2
 
 //function declarations
-void LEDs_off(void); //Turn off all LEDs
-void pins_config(void); //Initial pins config
-void LED_toggle(int number_of_LEDs); // LEDs bar
-void lcd_config(void); //Initial LCD config
-void Load_bar(int distance);//loading bar function
+void LEDs_off(void);					//Turn off all LEDs
+void pins_config(void);					//Initial pins config
+void LED_toggle(int number_of_LEDs);	//LEDs bar
+void lcd_config(void);					//Initial LCD config
+void Load_bar(int distance);			//loading bar function
 
 
 #endif /* PROJECT_SETUP_H_ */
