@@ -2,7 +2,7 @@
  * main.c
  *
  * Created: 03.12.2020 13:33:19
- * Author : Alexandr Voronin, Richard Šebo
+ * Author : Alexandr Voronin, Richard Å ebo
  */ 
 
 /* Includes ----------------------------------------------------------*/
@@ -51,8 +51,8 @@ int main(void)
 	
 	sei(); //enable interrupts
 	
-    while (1) 
-    {	
+    	while (1) 
+    	{	
 		if (sensor_id == 1)
 		{
 			_delay_ms(60);							//ensure one cycle lasts minimum 50us
